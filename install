@@ -1,0 +1,36 @@
+#!/usr/bin/env php
+<?php
+$configfile = 'config.inc.php';
+if (!file_exists(__DIR__ . '/' . $configfile)) {
+  echo 'Please configure the application. Copy the sample file and modify it:' . "\n";
+  echo 'cp ' . $configfile . '.sample ' . $configfile . "\n";
+  exit(1);
+}
+
+require_once __DIR__ . '/config.inc.php';
+require_once LIBS . '/Db.php';
+
+try {
+  $db = new Db($db);    
+} catch(Exception $e) {
+  echo _('Cannot connect to the database:') . ' ' . $e->getMessage() . "\n";
+  $msg = $e->getMessage();
+  if ($msg == "could not find driver" && $db->type == 'sqlite') {
+    echo _("Please install PHP sqlite module:") . "\n";
+    echo 'apt-get install php5-sqlite' . "\n";
+  }
+  exit(2);
+}
+
+$sql_file = file_get_contents('db/users.sql');
+$sql_queries = explode(';', $sql_file);
+foreach ($sql_queries as $sql) {
+  $sql = trim($sql);
+  $db->q($sql);
+}
+
+if (!file_exists(__DIR__ . '/tmp')) {
+  mkdir(__DIR__ . '/tmp');
+  chmod(__DIR__ . '/tmp',755);
+}
+

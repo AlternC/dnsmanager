@@ -1,0 +1,8 @@
+config.inc.php
+config.inc.sh
+*~
+\#*\#
+htpasswd.*
+*.mo
+tmp/
+storage/

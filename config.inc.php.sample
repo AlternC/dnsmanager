@@ -1,0 +1,41 @@
+<?php
+/**
+ * Definition of some constants for directories
+ *
+ * The directories did not end with a "/".
+ */
+define('ROOT', dirname(__FILE__));
+define('MODULES', ROOT . '/modules');
+define('LIBS', ROOT . '/libs');
+define('LOCALES', ROOT . '/locales');
+define('VIEWS', ROOT . '/views');
+
+/**
+ * Configuration of the database
+ */
+
+// Example with MySQL
+$db->type = 'mysql';
+$db->host = '127.0.0.1';
+$db->user = 'omkt';
+$db->pass = 'ieGh8AVa';
+$db->name = 'omkt';
+
+// Example with PostgreSQL
+$db->type = 'pgsql';
+$db->host = '127.0.0.1';
+$db->user = 'omkt';
+$db->pass = 'ieGh8AVa';
+$db->name = 'omkt';
+
+// Example with SQLite
+$db->type = 'sqlite';
+$db->path = ROOT . '/octomanager.db';
+
+/**
+ * Definition of some constants for the URLs
+ *
+ * The directories end with a "/".
+ */
+define('BASE_URL', '/');
+define('STATIC_URL', '/static/');

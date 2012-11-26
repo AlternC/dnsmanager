@@ -1,0 +1,7 @@
+Files:
+{module_name}/
+	hooks.php
+	controller.php
+	views/
+		{view_name}.php
+	scripts/

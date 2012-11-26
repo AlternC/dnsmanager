@@ -1,0 +1,14 @@
+Options -Indexes
+
+# Turn on URL rewriting engine
+RewriteEngine On
+RewriteBase /
+
+# Everything NOT in static/ is served by the catchall index.php :
+RewriteCond %{REQUEST_URI} !/static/
+
+#we may also disable rewriting for existing files or directories
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule .* index.php [L]

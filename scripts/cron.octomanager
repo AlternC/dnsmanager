@@ -1,0 +1,11 @@
+###################################################################
+# TODO tenir compte du PATH précisé en conf et pas en dur ici...
+###################################################################
+
+MAILTO=root
+
+### Mailing ###
+*/5 * * * *	root	/var/www/om/modules/annonces/scripts/do_mailing.php
+
+### Compta  ###
+0   3 * * * root	/var/www/om/modules/factures/scripts/analytique.sh

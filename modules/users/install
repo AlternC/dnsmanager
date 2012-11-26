@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+$sql = <<<EOF
+CREATE TABLE IF NOT EXISTS `contacts` (
+  `cid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type` varchar(32) NOT NULL,
+  `contact` text NOT NULL,
+  `uid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`cid`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Used by the module ''users''.'
+EOF;
+require_once __DIR__ . '/../../config.inc.php';
+require_once LIBS . '/Db.php';
+
+try {
+  $db = new Db($db);
+}
+catch (Exception $e) {
+  echo _('Connexion à la base de données échouée :') . ' ' . $e->getMessage() . "\n";
+  exit;
+}
+$db->q($sql);
+
+printf(_("Assurez vous que www-data a les droits pour écrire dans %s"), __DIR__ . '/htpasswd.users');
+echo "\n";

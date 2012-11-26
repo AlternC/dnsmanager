@@ -1,0 +1,300 @@
+/*
+ * Liens
+ */
+a {
+    color: #E0691A;
+    background: inherit;
+    text-decoration: none;
+}
+a:hover {
+    color: #6C757A;
+    background: inherit;
+}
+/*
+  Bleu foncé : #2a3990
+  Bleu clair : #2a74b7
+  Gris : #F0F0FA
+  */
+
+html {
+    font-size: 100%; /* Il parait que ça évite un bug dans IE6 et IE7. */
+}
+body, textarea, input {
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+}
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5em;
+    /* background-color: #FFFFFF; */
+    background-color: #F0F0FA;
+    color: #454545;
+}
+#global {
+    /* border: 1px solid black; */
+    min-width: 960px;
+    max-width: 1440px;
+    margin: 0 auto;
+    background-color: #F0F0FA;
+    background-image: url(/static/bg2.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+
+#top,
+#header h1,
+#menu,
+#content,
+#footer {
+    padding: 0 10px;
+}
+
+#header {
+    /* border: 1px solid red; */
+}
+
+/*
+ * TOP
+ */
+#top {
+    background-color: #2A3990;
+    color: #F0F0FA;
+    text-align: right;
+    padding: 2px 15px;
+    font-size: 0.8em;
+}
+#top p {
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+#top p.login {
+    float: none;
+    text-align: right;    
+}
+
+/*
+ * MENU
+ */
+#menu {
+    height: 32px;
+    clear: both;
+    color: #F0F0FA;
+    margin: 0 0 0 0px;
+    background: #2A74B7;
+    padding: 0 10px 0 40px;
+}
+#menu ul {
+    list-style: none;
+    margin: 0;
+}
+#menu li {
+    margin: 0;
+    padding: 6px 12px 6px 12px;
+    color: #FFEADC;
+    background: #2A74B7;
+    float: left;
+}
+#menu li.active {
+    background: #2A3990 url(http://www.octopuce.fr/i/bar.gif) no-repeat center top;
+    color: white;
+    font-weight: bold;
+    padding: 6px 12px 6px 12px;
+}
+#menu li a {
+    font-weight: bold;
+    color: white;
+    background: inherit;
+    text-decoration: none;
+}
+#menu a:hover {
+    /* color: #2A3990; */
+    border-bottom: 1px dashed white;
+}
+
+
+#menu_plus ul {
+    width: -moz-max-content;
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#menu_plus ul li {
+    float: none;
+}
+
+li#menu_plus:hover > ul {
+    display: block;
+}
+li#menu_plus {
+   position: relative;
+}
+li#menu_plus ul {
+    position: absolute;
+    top: 30px;
+    left: 0;
+}
+
+/*
+ * Content
+ */
+#content {
+    /* border: 1px solid green; */
+    min-height: 500px;
+}
+
+/*
+ * Footer
+ */
+#footer {
+    /* border: 1px solid blue; */
+    clear: both;
+    text-align: center;
+    padding: 10px 0 10px 0;
+    margin: 0;
+    border-top: 1px solid #CCC;
+    line-height: 1.8em;
+}
+#footer a {
+    color: gray;
+}
+
+/*
+ * Formulaires
+ */
+
+label.associate {
+    display: block;
+    width: 180px;
+    float: left;
+    text-align: right;
+    margin-right: 5px;
+}
+
+input[type=text],
+input[type=password],
+textarea,
+select {
+    width: 250px;
+}
+textarea.text {
+    width: 550px;
+    height: 200px;
+}
+textarea.list {
+    height: 100px;
+}
+legend {
+    font-weight: bold;
+}
+
+form p.submit {
+    clear: both;
+    padding-top: 10px;
+    text-align: center;
+}
+form .input-select-multiple {
+    background-color: white;
+    border: 1px solid gray;
+    height: 200px;
+    overflow: auto;
+    width: 250px;
+}
+
+div.error {
+    color: red;
+    border: 3px double red;
+}
+
+#form_sms_message {
+    padding-bottom: 15px;
+}
+#form_sms_message_counter {
+    position: relative;
+    left: 160px;
+    bottom: 25px
+}
+
+
+#sidebar {
+    width: 180px;
+    padding: 10px;
+    min-height: 500px;
+    float: left;
+    background-color: #2A74B7;
+    color: black;
+}
+#sidebar a {
+    color: white;
+    font-weight: bold;
+}
+#sidebar a:hover {
+    /* color: #2A3990; */
+    border-bottom: 1px dashed white;
+}
+
+#content.with-sidebar {
+    margin-left: 200px;
+}
+
+
+#breadcrumb {
+    margin-top: 0;
+    padding-top: 10px;
+    list-style: none;
+}
+#breadcrumb li {
+    display: inline;
+}
+#breadcrumb li:before {
+    content: " » ";
+}
+#breadcrumb li.first:before {
+    content: "";
+}
+
+table.list tr:nth-child(even) {
+    background: #CCC
+}
+table.list tr:nth-child(odd) {
+    background: #FFF
+}
+table.list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.list td,
+table.list th {
+    /*border: 1px solid black;*/
+    padding: 2px 5px;
+}
+
+.graph_wrapper {
+    float: left;
+    border: 1px solid gray;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+
+.field-details {
+  font-size: 80%;
+  color: gray;
+  float: right;
+}
+
+table.legend {
+    margin-top: 10px;
+    float: right;
+    font-size: 80%;
+}
+
+table.col td {
+    padding: 0 0 0 10px;
+    vertical-align: top;
+}
