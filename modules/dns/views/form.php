@@ -28,7 +28,7 @@ require VIEWS . '/header.php';
 
 <form action="" method="post">
   <fieldset style="width: 60%;">
-    <legend><?php __("Add a server in the DNS Manager"); ?></legend>
+  <legend><?php if ($op=="add") __("Add a server in the DNS Manager"); else __("Edit a server in the DNS Manager"); ?></legend>
     <?php input('hostname', _("Hostname:"), 'text', $data['hostname']); ?>
     <?php input('ip', _("IPv4 Address:"), 'text', $data['ip']); ?>
 

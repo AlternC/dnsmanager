@@ -1,38 +1,53 @@
 <?php
 $title = $server->hostname;
-$breadcrumb = array('dns/servers' => _('Servers'), '' => $server->hostname);_
+$breadcrumb = array('dns/servers' => _('Servers'), '' => $server->hostname);
 
-$menu1 = html_list(_("Actions"),
-		   array(l(_("Edit"), 'dns/edit/' . $user->uid),
-			 l(_("Delete"), 'dns/delete/' . $user->uid),
-			 ));
-$infos = array($server);
-Hooks::call('server_show_links', $infos);
-array_shift($infos);
-$menu2 = html_list(_("Other informations"), $infos);
+if ($_REQUEST["msg"]) $errors[]=htmlentities($_REQUEST["msg"]);
 
-$sidebar = $menu1 . $menu2;
-
-require VIEWS . '/header.php';
+require(VIEWS . '/header.php');
 ?>
 
-<h2><?php __("General informations"); ?></h2>
+<?php if(count($errors) > 0): ?>
+<div class="flash error">
+  <?php if(count($errors) == 1): ?>
+  <p><?php echo $errors[0]; ?></p>
+  <?php elseif(count($errors) > 1): ?>
+  <ul>
+    <?php foreach($errors as $err): ?>
+    <li><?php echo $err; ?></li>
+    <?php endforeach; ?>
+  </ul>
+  <?php endif; ?>
+</div>
+<?php endif; ?>
+
+
+<h2><?php __("Server informations"); ?></h2>
 <dl>
+  <dt><?php __("Hostname"); ?></dt>
+  <dd><?php echo $server->hostname; ?></dd>
+
+  <dt><?php __("IPv4 Address"); ?></dt>
+  <dd><?php echo $server->ip; ?></dd>
+
+  <dt><?php __("AlternC synchronization enabled ?"); ?></dt>
+  <dd><?php if ($server->enabled) __("Yes"); else __("No"); ?></dd>
+
+  <dt><?php __("FQDN"); ?></dt>
+  <dd><?php echo $server->fqdn; ?></dd>
+
   <dt><?php __("Login"); ?></dt>
-  <dd><?php echo $user->login; ?></dd>
+  <dd><?php echo $server->login; ?></dd>
 
-  <dt><?php __("Email address"); ?></dt>
-  <dd><?php echo $user->email; ?></dd>
+  <dt><?php __("Password"); ?></dt>
+  <dd><?php echo $server->password; ?></dd>
 
-  <dt><?php __("Enabled?"); ?></dt>
-  <dd><?php echo $user->enabled; ?></dd>
-
-  <dt><?php __("Administrator?"); ?></dt>
-  <dd><?php echo $user->admin; ?></dd>
+  <dt><?php __("Is it SSL-Enabled?"); ?></dt>
+  <dd><?php if ($server->hasssl) __("Yes"); else __("No"); ?></dd>
 </dl>
 
 <?php
-   $infos = array($user);
+   $infos = array($servers);
    Hooks::call('servers_show', $infos);
    array_shift($infos);
    echo implode("\n", $infos);
