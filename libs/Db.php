@@ -102,7 +102,11 @@ class Db extends PDO {
     }
     $statement->setFetchMode($fetch_mode);
     $r = $statement->execute($parameters);
-    if ($r === false) return false;
+    if ($r === false)  {
+      $infos = $this->errorInfo();
+      echo "SQL ERR: " . $infos[0] . ".\nQuery was: $query\n"; //TODO: meilleure gestion des erreurs      
+      return false;
+    }
     return $statement;
   }
 

@@ -20,7 +20,16 @@ require(VIEWS . '/header.php');
   <?php endif; ?>
 </div>
 <?php endif; ?>
-
+    <style>
+    td.col_enabled,
+  td.col_admin,
+  td.col_accounting,
+  td.col_actions {
+      text-align: center;
+			     }
+table.list col:first-child {background: #FF0}
+</style>
+<div style="float: left; padding-right: 50px">
 
 <h2><?php __("Server informations"); ?></h2>
 <dl>
@@ -51,6 +60,28 @@ require(VIEWS . '/header.php');
    Hooks::call('servers_show', $infos);
    array_shift($infos);
    echo implode("\n", $infos);
+
 ?>
+</div>
+
+<div style="float: left; padding-right: 50px">
+<h2><?php __("Zone hosted in that server"); ?></h2>
+<table class="list"><tr><th>Zone</th><th>Date</th></tr>
+  <?php
+foreach($zones as $z) {
+  if ($z->enabled) {
+    echo "<tr><td>".$z->zone."</td><td>".$z->datec."</td></tr>";
+  } else {
+    echo "<tr><td><span class=\"flash error\"".$z->zone." "._("DISABLED (conflict)")."</span></td><td>".$z->datec."</td></tr>";
+  }
+}
+?>
+</table>
+</div>
+
+<div style="float: left">
+<h2><?php __("Last log for this server"); ?></h2>
+<?php echo html_table_list($diffheaders, $diff); ?>
+</div>
 
 <?php require VIEWS . '/footer.php'; ?>

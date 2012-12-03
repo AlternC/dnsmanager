@@ -5,6 +5,10 @@ class DnsHooks extends AHooks {
 		    'url' => '/dns/servers',
 		    'name' => _("My Servers"),
 		    );
+    $menu[] = array(
+		    'url' => '/dns/log',
+		    'name' => _("Server Logs"),
+		    );
   }
 
 

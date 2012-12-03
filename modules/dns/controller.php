@@ -1,4 +1,7 @@
 <?php
+
+require_once(__DIR__.'/libs/constants.php');
+
 class DnsController extends AController {
 
   public function indexAction() {
@@ -66,12 +69,42 @@ class DnsController extends AController {
     $uid=$GLOBALS['me']['uid'];
     $st = $db->q('SELECT * FROM servers WHERE user=? AND id=?',array($uid,$id));
     $servers = array();
-    if ($server = $st->fetch()) {
-      $this->render('show', array('server' => $server));
-    } else {
+    $server = $st->fetch();
+    if (!$server) {
       $errors[]=_("Server not found");
       $this->render('list', array('errors'=>$errors));      
+      return;
     }
+
+    // List the zones for this server
+    $zones = $db->qlist('SELECT * FROM zones WHERE server=? ORDER BY zone',array($id));
+
+    // List the last log for this server
+    $st = $db->q("SELECT difflog.* FROM difflog  WHERE difflog.server=".$id." ORDER BY difflog.datec DESC LIMIT 0,50;");
+    $aaction=array(
+		   0 => _("Timeout connecting to the server"),
+		   1 => _("Zone added"),
+		   2 => _("Zone added but disabled (conflict)"),
+		   3 => _("Zone deleted"),
+		   4 => _("Zone enabled (no conflict)"),
+		   );
+    while ($data = $st->fetch()) {
+      $diff[] = array(
+		      '_' => $data,
+		      'action' => $aaction[$data->action],
+		      'zone' => $data->zone,
+		      'datec' => $data->datec,
+		      );
+    }
+
+    $diffheaders = array(
+		     'action' => _('Event'),
+		     'zone' => _('Zone'),
+		     'datec' => _('Date of the event'),
+		     );
+
+
+    $this->render('show', array('server' => $server, 'zones' => $zones, 'diff' => $diff, 'diffheaders' => $diffheaders));
   }
     
 
@@ -220,6 +253,61 @@ class DnsController extends AController {
     }
     $this->render('delete', array('server' => $server));
   }
+
+
+
+  /*
+   * Show the last log of a user:
+   */
+  public function logAction() {
+    check_user_identity();
+    global $db;
+
+    $uid=intval($GLOBALS['me']['uid']);
+    $offset=intval($_REQUEST["offset"]);
+    if ($offset<0) $offset=0; 
+    $count=100; //intval($_REQUEST["count"]);
+    $st = $db->q("SELECT difflog.*, servers.fqdn FROM difflog, servers WHERE servers.id=difflog.server AND servers.user=".$uid." ORDER BY difflog.datec DESC LIMIT ".$offset.",".$count.";");
+    $servers = array();
+    $aaction=array(
+		   0 => _("Timeout connecting to the server"),
+		   1 => _("Zone added"),
+		   2 => _("Zone added but disabled (conflict)"),
+		   3 => _("Zone deleted"),
+		   4 => _("Zone enabled (no conflict)"),
+		   );
+    while ($data = $st->fetch()) {
+      $diff[] = array(
+		       '_' => $data,
+		       'fqdn' => l($data->fqdn, 'dns/show/' . $data->server),
+		       'action' => $aaction[$data->action],
+		       'zone' => $data->zone,
+		       'datec' => $data->datec,
+		       );
+    }
+    if (count($diff)==0) {
+      
+    }
+    /*
+    foreach ($diff as $k => $server) {
+      $uid = $server['_']->id;
+      $servers[$k]['actions'] = l(_("Edit"), 'dns/edit/' . $uid) .
+	' | ' . l(_("Delete"), 'dns/delete/' . $uid)
+	;
+    }
+    */
+
+    $headers = array(
+		     'fqdn' => _('Server FQDN'),
+		     'action' => _('Event'),
+		     'zone' => _('Zone'),
+		     'datec' => _('Date of the event'),
+		     );
+    //    $headers['actions'] = _('Actions');
+    $this->render('diff', array('diff' => $diff, 'headers' => $headers));
+  }
+
+
 
 
 
