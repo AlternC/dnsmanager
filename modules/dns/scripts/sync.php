@@ -13,7 +13,7 @@ define("MAX_SOCKETS",200);
 define("DEFAULT_CAFILE","/etc/ssl/certs/ca-certificates.crt");
 // Absolute path to the bind slavedns zone list. 
 // We must be allowed to write to this file.
-define("SLAVEZONE_FILE","/tmp/bind.slave.conf");
+define("SLAVEZONE_FILE","/var/lib/slavedns/bind.slave.conf");
 // Command to launch to reload bind configuration. 
 // Should be something like "rndc reconfig" maybe using sudo if you are neither root nor bind user.
 // DON'T USE BIND9 RESTART OR RNDC RELOAD. READ THE MAN PAGES!
