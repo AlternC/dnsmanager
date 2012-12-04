@@ -8,6 +8,8 @@ class indexController extends AController {
 
   function indexAction() {
     //    $view["msg"] = _("Welcome to AlternC DNS Manager");
+    check_user_identity(false);
+
     $this->render("index", $view);
   }
 }

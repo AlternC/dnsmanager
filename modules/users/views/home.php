@@ -1,6 +1,11 @@
 
-<p><?php __("Welcome into AlternC DNS Manager. You can either log into your existing account, or create an new account.");  ?></p>
-
+<p><?php 
+if (ALLOW_CREATE_ACCOUNT===true) {
+  __("Welcome into AlternC DNS Manager. You can either log into your existing account, or create an new account.");  
+} else {
+  __("Welcome into AlternC DNS Manager. Please login into your account");  
+}
+?></p>
 
 <div id="login" style="float: left; width: 40%">
 
@@ -12,7 +17,8 @@
 
 </div>
 
-
+   <?php if (ALLOW_CREATE_ACCOUNT===true) {
+?>
 <div id="createaccountform" style="width: 60%; float: right">
 
   <h2><?php __("New Users"); ?></h2>
@@ -27,5 +33,5 @@
   <p class="submit"><input type="submit" value="<?php __("Create an account and send me a confirmation email"); ?>"/>
   - <input type="button" onclick="javascript:history.go(-1)" value="<?php __("Cancel"); ?>" /></p>
   </form>
-
 </div>
+   <?php } ?>

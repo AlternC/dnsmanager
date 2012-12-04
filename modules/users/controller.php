@@ -114,12 +114,15 @@ class UsersController extends AController {
   }
 
   /*
-   * Add a user (for admins only)
+   * Add a user (if ! ALLOW_CREATE_ACCOUNT===true, for admins only)
    */
   public function createAction() {
 
     $errors = array(); // OK if no problem
     
+    if (ALLOW_CREATE_ACCOUNT!==true && !is_admin()) 
+      not_found();
+
     if (!empty($_POST)) {
       $errors = $this->verifyForm($_POST, 'add');
       // already exist ? 

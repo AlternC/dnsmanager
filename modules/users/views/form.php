@@ -32,7 +32,7 @@ require VIEWS . '/header.php';
 
 
 <form action="" method="post">
-  <fieldset style="width: 60%;">
+  <fieldset style="width: 70%;">
     <legend><?php __("Identity"); ?></legend>
     <?php if ($op != 'meedit'): ?>
     <?php input('login', _("Login:"), 'text', $data['login']); ?>

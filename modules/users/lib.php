@@ -20,7 +20,7 @@ class Users {
   
     $query = 'SELECT uid, login, email, admin '
       . 'FROM users '
-      . 'WHERE login = ? AND pass = ? AND enabled = 1';
+      . 'WHERE login = ? AND pass = ? AND enabled = 1 AND validated = 1';
     return $db->qone($query, array($_login, $pass), PDO::FETCH_ASSOC);
   }
 
