@@ -55,7 +55,6 @@ require VIEWS . '/header.php';
     <?php input('admin', _("Is it an administrator?"), 'checkbox', $data['admin']); ?>
     <?php input('enabled', _("Is it enabled?"), 'checkbox', $data['enabled']); ?>
     <?php endif; ?>
-    <?php echo html_field('checkbox', 'validated', _("Email validated")); ?>
   </fieldset>
 
   <p class="submit"><input type="submit" value="<?php

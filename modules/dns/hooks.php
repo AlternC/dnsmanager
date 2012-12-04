@@ -12,4 +12,8 @@ class DnsHooks extends AHooks {
   }
 
 
+  public function users_me() {
+    $this->render("me");
+  }
+
 }

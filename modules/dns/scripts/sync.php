@@ -20,7 +20,9 @@ define("SLAVEZONE_FILE","/var/lib/slavedns/bind.slave.conf");
 // You can replace it by a shell-script that could push the zone to the real servers
 define("BIND_RELOAD","sudo rndc reconfig");
 
+$DEBUG=true;
 
+// FIXME: if -f FORCE the reload of all zones
 if (isset($argv) && count($argv)>1) {
   // we may ask for only some FQDN. TODO.
 }
@@ -63,6 +65,7 @@ function rolling_curl($urls, $callback, $custom_options = null) {
   for ($i = 0; $i < $rolling_window; $i++) {
     $ch = curl_init();
     $options[CURLOPT_URL] = $urls[$i]["url"];
+    if ($GLOBALS["DEBUG"]) echo "URL: ".$urls[$i]["url"]."\n";
     curl_setopt_array($ch,$options);
     // Handle custom cafile for some https url
     if (strtolower(substr($options[CURLOPT_URL],0,5))=="https") { // https :) 
@@ -117,14 +120,16 @@ function rolling_curl($urls, $callback, $custom_options = null) {
 
 $somethingchanged=false; // Did something changed ? if yes, reconfig bind 
 $serversalert=array(); // Which servers had alerts 
+$stats=array("serverok"=>0,"added"=>0,"deleted"=>0,"serverfailure"=>0);
 
 function parsezone($url,$content,$info) {
-  global $db,$somethingchanged,$serversalert;
-  /*
-  echo "Url:\n"; print_r($url);
-  echo "Content:\n"; print_r($content);
-  echo "Info:\n"; print_r($info);
-  */
+  global $db,$somethingchanged,$serversalert,$stats;
+
+  if ($GLOBALS["DEBUG"]) {  
+    echo "Url:\n"; print_r($url);
+    echo "Content:\n"; print_r($content);
+    echo "Info:\n"; print_r($info);
+  }
 
   if ($info["http_code"]==200) {
     $s=explode("\n",$content);
@@ -135,6 +140,12 @@ function parsezone($url,$content,$info) {
 	$domains[]=$line;
       }
     }
+    if (!count($domains)) {
+      $db->q("INSERT INTO difflog SET server=?, datec=NOW(), action=?;",array($url["id"],DIFF_ACTION_EMPTY));
+      return; // Exit for this server in case of empty zone...
+    }
+
+    $stats["serverok"]++;
     $domains=array_unique($domains);
     sort($domains); 
     // compare with current (sql) list of zones, add or remove as needed...
@@ -158,6 +169,7 @@ function parsezone($url,$content,$info) {
 	$action=DIFF_ACTION_INSERTED;
       }
       $somethingchanged=true;
+      $stats["added"]++;
       $db->q("INSERT INTO zones SET server=?, zone=?, enabled=?, datec=NOW();",array($url["id"],$domain,$enabled));
       $db->q("INSERT INTO difflog SET server=?, zone=?, datec=NOW(), action=?;",array($url["id"],$domain,$action));
     }
@@ -165,6 +177,7 @@ function parsezone($url,$content,$info) {
     $delete=array_diff($current,$domains);
     foreach($delete as $domain) {
       $somethingchanged=true;
+      $stats["deleted"]++;
       $db->q("DELETE FROM zones WHERE server=? AND zone=?;",array($url["id"],$domain));
       $db->q("INSERT INTO difflog SET server=?, zone=?, datec=NOW(), action=?;",array($url["id"],$domain,DIFF_ACTION_DELETED));
       // search for this domain in our list : if it already exist, and is disabled, enable it
@@ -175,25 +188,30 @@ function parsezone($url,$content,$info) {
 	$db->q("INSERT INTO difflog SET server=?, zone=?, datec=NOW(), action=?;",array($already->server, $domain, DIFF_ACTION_ENABLED));
       }
     }
-    $db->q("UPDATE servers SET updated=NOW() WHERE id=?;",array($url["id"]));
+    $db->q("UPDATE servers SET updated=NOW(), lastcount=(SELECT COUNT(*) FROM zones WHERE server=? AND enabled=1) WHERE id=?;",array($url["id"],$url["id"]));
 
   } else { // HTTP_CODE != 200 
+    $stats["serverfailure"]++;
     $serversalert[]=$url["id"];
     $db->q("INSERT INTO difflog SET server=?, datec=NOW(), action=?;",array($url["id"],DIFF_ACTION_TIMEOUT));
   }
 } // parsezone (callback function)
 
 
-$st=$db->q("SELECT id,fqdn,login,password,hasssl,cacert FROM servers WHERE enabled=1 ORDER BY id;");
+
+
+
+
+$st=$db->q("SELECT id,url,cacert FROM servers WHERE enabled=1 ORDER BY id;");
 
 $scount=0;
 $srv=array();
 // How many HTTP(S) sockets can we do in parallel ? 
 while ($c=$st->fetch(PDO::FETCH_ASSOC)) {
-  $srv[$scount]=array( "url" => "http".(($c["hasssl"])?"s":"")."://".urlencode($c["login"]).":".urlencode($c["password"])."@".$c["fqdn"]."/admin/domlist.php",
+  $srv[$scount]=array( "url" => $c["url"],
 		       "id" => $c["id"]
 		       );
-  if ($c["hasssl"] && $c["cacert"]) {
+  if ($c["cacert"]) {
     $tmpname=tempnam('/tmp/','slavedns-certificate.');
     if (@file_put_contents($tmpname,$c["cacert"])) {
       $srv[$scount]["cafile"]=$tmpname;
@@ -234,3 +252,7 @@ if ($somethingchanged) {
 // If yes, send some alerts
 if (count($serversalert)) {
 }
+
+// Add a difflog entry for server 0 telling that sync was launched properly
+$db->q("INSERT INTO difflog SET server=0, datec=NOW(), action=?, zone=?;",array(DIFF_ACTION_STATS,serialize($stats)));
+

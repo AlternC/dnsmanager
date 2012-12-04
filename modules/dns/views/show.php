@@ -4,6 +4,7 @@ $breadcrumb = array('dns/servers' => _('Servers'), '' => $server->hostname);
 
 if ($_REQUEST["msg"]) $errors[]=htmlentities($_REQUEST["msg"]);
 
+$sidebar = '<p>→ ' . l(_("Edit this server"), 'dns/edit/'.$server->id) . '</p>';
 require(VIEWS . '/header.php');
 ?>
 
@@ -42,17 +43,11 @@ table.list col:first-child {background: #FF0}
   <dt><?php __("AlternC synchronization enabled ?"); ?></dt>
   <dd><?php if ($server->enabled) __("Yes"); else __("No"); ?></dd>
 
-  <dt><?php __("FQDN"); ?></dt>
-  <dd><?php echo $server->fqdn; ?></dd>
+  <dt><?php __("URL"); ?></dt>
+  <dd><?php echo $server->url; ?></dd>
 
-  <dt><?php __("Login"); ?></dt>
-  <dd><?php echo $server->login; ?></dd>
-
-  <dt><?php __("Password"); ?></dt>
-  <dd><?php echo $server->password; ?></dd>
-
-  <dt><?php __("Is it SSL-Enabled?"); ?></dt>
-  <dd><?php if ($server->hasssl) __("Yes"); else __("No"); ?></dd>
+  <dt><?php __("SSL Certificate (when needed)"); ?></dt>
+  <dd><div class="certview"><?php echo nl2br($server->cacert) ?></div></dd>
 </dl>
 
 <?php
@@ -70,10 +65,12 @@ table.list col:first-child {background: #FF0}
   <?php
 foreach($zones as $z) {
   if ($z->enabled) {
-    echo "<tr><td>".$z->zone."</td><td>".$z->datec."</td></tr>";
+    echo "<tr><td>".$z->zone."</td><td>";
   } else {
-    echo "<tr><td><span class=\"flash error\"".$z->zone." "._("DISABLED (conflict)")."</span></td><td>".$z->datec."</td></tr>";
+    echo "<tr><td><span class=\"error\">".$z->zone." "._("DISABLED (conflict)")."</span></td><td>";
   }
+  echo substr($z->datec,0,10);
+  echo "</td></tr>";
 }
 ?>
 </table>
@@ -81,7 +78,17 @@ foreach($zones as $z) {
 
 <div style="float: left">
 <h2><?php __("Last log for this server"); ?></h2>
-<?php echo html_table_list($diffheaders, $diff); ?>
+<table class="list"><tr><th>Event</th><th>Zone</th><th>Date/Hour</th></tr>
+  <?php
+foreach($diff as $z) {
+     echo "<tr><td>".$z['action']."</td>";
+     echo "<td>".$z['zone']."</td><td>";
+     if (substr($z['datec'],0,10)!=date('Y-m-d')) echo substr($z['datec'],0,10); else echo substr($z['datec'],11,8);
+     echo "</td></tr>";
+}
+?>
+</table>
+
 </div>
 
 <?php require VIEWS . '/footer.php'; ?>

@@ -35,17 +35,16 @@ require VIEWS . '/header.php';
     <?php input('enabled', _("Enable DNS synchronization using AlternC's protocol?"), 'checkbox', $data['enabled']); ?>
 </fieldset>
 
-    <p><?php __("If you enable the synchronization of DNS zones from your AlternC to this manager, you need to fill the field below. You must create the account in the administrator panel of AlternC"); ?></p>
+  <p><?php __("If you enable the synchronization of DNS zones from your AlternC to this manager, you need to fill the fields below."); ?></p>
 
   <fieldset style="width: 60%;">
     <legend><?php __("AlternC synchronisation"); ?></legend>
-    <?php input('fqdn', _("Fqdn:"), 'text', $data['fqdn']); ?>
-    <?php input('login', _("Login:"), 'text', $data['login']); ?>
-    <?php input('password', _("Password:"), 'text', $data['password']); ?>
-
-    <?php input('hasssl', _("Is it ssl-enabled?"), 'checkbox', $data['hasssl']); ?>
+<?php input('url', _("URL:"), 'text', $data['url'],"largeinput"); ?>
+<?php input('cacert', _("CA Certificate:"), 'textarea', $data['cacert'],"certificate"); ?>
+<p><?php __("You must have created a SlaveDNS account in the administrator panel of AlternC."); ?>
+<br/ ><?php __("The url is usually like https://login:password@panel.yourserver.tld/domlist.php"); ?>
+<br/ ><?php __("If you don't have a proper CA-signed certificate, you can paste here your self-signed certificate."); ?>
   </fieldset>
-    <p><?php __("Your server must have AlternC panel on http(s)://fqdn/"); ?>
   <p class="submit"><input type="submit" value="<?php
 if ($op == 'add') __("Add this server");
 if ($op == 'edit') __("Edit this server");

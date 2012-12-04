@@ -132,20 +132,26 @@ function pager($offset,$count,$total,$url,$before="",$after="") {
   echo $after;
 }
 
-function input($name, $label, $type, $value) {
+function input($name, $label, $type, $value,$class="") {
   if (!empty($label))
     echo '<label class="associate" for="' . $name . '">' . $label . '</label>' . "\n";
   switch ($type) {
   case 'text':
   case 'password':
-    echo '<input type="' . $type . '" name="' . $name . '" id="' . $name . '" value="' . htmlentities($value, ENT_QUOTES, 'UTF-8') . '" /><br />';
+    echo '<input type="' . $type . '" name="' . $name . '" id="' . $name . '" value="' . htmlentities($value, ENT_QUOTES, 'UTF-8') . '"';
+    if ($class) echo ' class="'.$class.'"';
+    echo '/><br />';
     break;
   case 'checkbox':
     $checked = ($value == 'on' || $value == '1') ? 'checked="checked" ' : '';
-    echo '<input type="' . $type . '" name="' . $name . '" id="' . $name . '" ' . $checked . '/><br />';
+    echo '<input type="' . $type . '" name="' . $name . '" id="' . $name . '" ' . $checked ;
+    if ($class) echo ' class="'.$class.'"';
+    echo '/><br />';
     break;
   case 'textarea':
-    echo '<textarea name="' . $name . '" id="' . $name . '">' . $value . '</textarea><br />';
+    echo '<textarea name="' . $name . '" id="' . $name . '"';
+    if ($class) echo ' class="'.$class.'"';
+    echo '>' . $value . '</textarea><br />';
     break;
   }
 }

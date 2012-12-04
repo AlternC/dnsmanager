@@ -23,9 +23,8 @@ class DnsController extends AController {
       $servers[] = array(
 		       '_' => $data,
 		       'name' => l($data->hostname, 'dns/show/' . $data->id),
-		       'fqdn' => $data->fqdn,
+		       'url' => $data->fqdn,
 		       'ip' => $data->ip,
-		       'ssl' => $data->hasssl,
 		       'enabled' => ($data->enabled)?_("Yes"):_("No"),
 		       'lastcount' => "<span class=\"".$this->lastcountstatus($data->lastcount)."\">".$data->lastcount."</span>",
 		       'updated' => $data->updated,
@@ -44,9 +43,9 @@ class DnsController extends AController {
 
     $headers = array(
 		     'name' => _('Hostname'),
-		     'fqdn' => _('Complete Hostname (FQDN)'),
 		     'ip' => _('IP Address'),
 		     'enabled' => _('Enabled'),
+		     'url' => _('URL'),
 		     'lastcount' => _('Last Domain Count'),
 		     'updated' => _('Updated on'),
 		     );
@@ -87,6 +86,7 @@ class DnsController extends AController {
 		   2 => _("Zone added but disabled (conflict)"),
 		   3 => _("Zone deleted"),
 		   4 => _("Zone enabled (no conflict)"),
+		   5 => _("Empty file received from server"),
 		   );
     while ($data = $st->fetch()) {
       $diff[] = array(
@@ -119,8 +119,8 @@ class DnsController extends AController {
       
       if (empty($errors)) {
         global $db;
-        $db->q('INSERT INTO `servers` (user, hostname, fqdn, login, password, ip, hasssl, enabled, created) VALUES(?, ?, ?, ?, ?, ?, ?, ?, NOW() )',
-               array( $uid, $_POST['hostname'], $_POST['fqdn'], $_POST['login'], $_POST['password'], $_POST['ip'],  ($_POST['hasssl'] == 'on') ? 1 : 0,   ($_POST['enabled'] == 'on') ? 1 : 0  )
+        $db->q('INSERT INTO `servers` (user, hostname, url, ip, cacert, enabled, created) VALUES(?, ?, ?, ?, ?, ?, NOW() )',
+               array( $uid, $_POST['hostname'], $_POST['url'], $_POST['ip'], $_POST['cacert'],   ($_POST['enabled'] == 'on') ? 1 : 0  )
 	       );
 	$id = $db->lastInsertId();
 	if (!$id) {
@@ -129,11 +129,9 @@ class DnsController extends AController {
 	  $args = array(
 			'id' => $id,
 			'hostname' => $_POST['hostname'],
-			'fqdn' => $_POST['fqdn'],
-			'login' => $_POST['login'],
-			'password' => $_POST['password'],
+			'url' => $_POST['url'],
+			'cacert' => $_POST['cacert'],
 			'ip' => $_POST['ip'],
-			'hasssl' => ($_POST['hasssl'] == 'on'),
 			'enabled' => ($_POST['enabled'] == 'on'),
 			);
 	  Hooks::call('dns_add', $args);
@@ -182,25 +180,16 @@ class DnsController extends AController {
       $errors = self::verifyForm($_POST, 'edit');
 
       if (empty($errors)) {
-        $db->q('UPDATE servers SET fqdn=?, hostname=?, login=?, password=?, ip=?, hasssl=?, enabled=? WHERE id=?',
+        $db->q('UPDATE servers SET url=?, hostname=?, cacert=?, ip=?, enabled=? WHERE id=?',
                array(
-                     $_POST['fqdn'],
+                     $_POST['url'],
                      $_POST['hostname'],
-                     $_POST['login'],
-                     $_POST['password'],
+                     $_POST['cacert'],
                      $_POST['ip'],
-                     ($_POST['hasssl'] == 'on') ? 1 : 0,
                      ($_POST['enabled'] == 'on') ? 1 : 0,
 		     $server->id,
                      )
                );
-
-	/*
-	$old_server = $server;
-	$server = $db->qone('SELECT uid, login, email, enabled, admin, validated FROM servers WHERE uid = ?', array($server->uid));
-	$args = array('old_server' => $old_server, 'new_server' => $server);
-	Hooks::call('servers_edit', $args);
-	*/
 
         // Message + redirection
 	header('Location: ' . BASE_URL . 'dns/show/' . $server->id . '?msg=' . _("Server successfully updated"));
@@ -245,6 +234,7 @@ class DnsController extends AController {
 
     if (!empty($_POST['op'])) {
 	$db->q('DELETE FROM servers WHERE id=?', array($id));
+	// TODO : delete the zones and force reload of BIND ! > launch sync in force mode !
 	$args = array($server);
 	Hooks::call('server_delete', $args);
         // Message + redirection
@@ -267,7 +257,7 @@ class DnsController extends AController {
     $offset=intval($_REQUEST["offset"]);
     if ($offset<0) $offset=0; 
     $count=100; //intval($_REQUEST["count"]);
-    $st = $db->q("SELECT difflog.*, servers.fqdn FROM difflog, servers WHERE servers.id=difflog.server AND servers.user=".$uid." ORDER BY difflog.datec DESC LIMIT ".$offset.",".$count.";");
+    $st = $db->q("SELECT difflog.*, servers.hostname FROM difflog, servers WHERE servers.id=difflog.server AND servers.user=".$uid." ORDER BY difflog.datec DESC LIMIT ".$offset.",".$count.";");
     $servers = array();
     $aaction=array(
 		   0 => _("Timeout connecting to the server"),
@@ -279,7 +269,7 @@ class DnsController extends AController {
     while ($data = $st->fetch()) {
       $diff[] = array(
 		       '_' => $data,
-		       'fqdn' => l($data->fqdn, 'dns/show/' . $data->server),
+		       'hostname' => l($data->hostname, 'dns/show/' . $data->server),
 		       'action' => $aaction[$data->action],
 		       'zone' => $data->zone,
 		       'datec' => $data->datec,
@@ -298,7 +288,7 @@ class DnsController extends AController {
     */
 
     $headers = array(
-		     'fqdn' => _('Server FQDN'),
+		     'hostname' => _('Server Hostname'),
 		     'action' => _('Event'),
 		     'zone' => _('Zone'),
 		     'datec' => _('Date of the event'),

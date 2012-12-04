@@ -145,7 +145,6 @@ class UsersController extends AController {
 			);
 	  Hooks::call('users_add', $args);
 	} 
-	print_r($args);
 	// Send a confirmation mail 
 	$key=substr(md5(HASH_KEY."-".$args["uid"]),0,8);
 	$to      = $args["email"];
@@ -436,16 +435,10 @@ AlternC's technical team.
 
     $uid=$GLOBALS['me']['uid'];
 
-    $user = $db->qone('SELECT uid, login, email, enabled, admin ' .
-                      'FROM users WHERE uid = :uid',
-                      array('uid' => $GLOBALS['me']['uid']));
+    $user = $db->qone('SELECT * FROM users WHERE uid = ?',
+                      array($GLOBALS['me']['uid']));
     if ($user == false)
       not_found();
-
-    $contacts = array();
-    foreach (self::$contacts_types as $type)
-      $contacts[$type] = $db->qlistone('SELECT contact FROM contacts WHERE uid = ? AND type = ?',
-                                       array($GLOBALS['me']['uid'], $type));
 
     if ($params[0] == 'edit') {
       $errors = array();

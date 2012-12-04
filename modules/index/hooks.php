@@ -2,10 +2,10 @@
 class IndexHooks {
 
   public function menu(&$menu) {
-    $menu[] = array(
+    array_unshift($menu,array(
 		    'url' => '/',
 		    'name' => _("Home"),
-		    );
+			      ));
   }
 
   public function ordering_hooks(&$infos) {
