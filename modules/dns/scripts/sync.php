@@ -136,7 +136,9 @@ function parsezone($url,$content,$info) {
     $domains=array();
     foreach($s as $line) {
       $line=trim(strtolower($line));
-      if (preg_match("#^[0-9a-z-\.]+$#",$line)) { // roughly. All what I found was *too* RFC-compliant, but Icann & registries are not respecting RFC...
+      if (preg_match("#^[0-9a-z-]+\.[0-9a-z-\.]+$#",$line)) {
+	// the preg is rough ... All what I found was *too* RFC-compliant, but Icann & registries are not respecting RFC...
+	// And we FORCE to have at least one DOT so that we don't start to host a TLD ^o^
 	$domains[]=$line;
       }
     }
@@ -165,9 +167,28 @@ function parsezone($url,$content,$info) {
 	$action=DIFF_ACTION_INSERTED_DISABLED;
 	// Send a mail ? TODO
       } else {
-	$enabled=1;
-	$action=DIFF_ACTION_INSERTED;
+
+	// Also search if this is a subdomain of an existing zone, on a server not owned by the same user !
+	$members=explode(".",$domain);
+	$sql="";
+	while (count($members)>1) {
+	  if ($sql) $sql.=" OR ";
+	  array_pop($members);
+	  $sql.=" zone='".implode(".",$members)."' ";
+	}
+	
+	$already=$db->qone("SELECT zones.id FROM zones,servers WHERE zones.enabled=1 AND zones.server=servers.id AND servers.user!=? AND ($sql) ",array($url["user"]));
+	if ($already) {
+	  $enabled=0; 
+	  $action=DIFF_ACTION_INSERTED_DISABLED;
+	  // Send a mail ? TODO
+	} else {
+	  $enabled=1;
+	  $action=DIFF_ACTION_INSERTED;
+	}
+
       }
+
       $somethingchanged=true;
       $stats["added"]++;
       $db->q("INSERT INTO zones SET server=?, zone=?, enabled=?, datec=NOW();",array($url["id"],$domain,$enabled));
@@ -202,14 +223,15 @@ function parsezone($url,$content,$info) {
 
 
 
-$st=$db->q("SELECT id,url,cacert FROM servers WHERE enabled=1 ORDER BY id;");
+$st=$db->q("SELECT id,user,url,cacert FROM servers WHERE enabled=1 ORDER BY id;");
 
 $scount=0;
 $srv=array();
 // How many HTTP(S) sockets can we do in parallel ? 
 while ($c=$st->fetch(PDO::FETCH_ASSOC)) {
   $srv[$scount]=array( "url" => $c["url"],
-		       "id" => $c["id"]
+		       "id" => $c["id"],
+		       "user" => $c["user"]
 		       );
   if ($c["cacert"]) {
     $tmpname=tempnam('/tmp/','slavedns-certificate.');
