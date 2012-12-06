@@ -13,22 +13,45 @@ class DnsController extends AController {
    * Show the list of servers of a user : 
    */
   public function serversAction() {
+    $this->servers(false);
+  }
+
+  public function allserversAction() {
+    $this->servers(true);
+  }
+
+
+  /** Show a list of servers, 
+   *  @param $allusers boolean shall we show all users' servers or just mine ?  
+   *  (if true must be admin)
+   */
+  function servers($allusers=false) {
     check_user_identity();
     global $db;
 
+    if ($allusers && !is_admin()) {
+      not_found();
+    }
+
     $uid=$GLOBALS['me']['uid'];
-    $st = $db->q('SELECT * FROM servers WHERE user=?',array($uid));
+    if ($allusers) {
+      $st = $db->q('SELECT servers.*,users.login FROM servers,users WHERE servers.user=users.uid ORDER BY servers.hostname');
+    } else {
+      $st = $db->q('SELECT * FROM servers WHERE user=? ORDER BY hostname',array($uid));
+    }
     $servers = array();
     while ($data = $st->fetch()) {
-      $servers[] = array(
-		       '_' => $data,
-		       'name' => l($data->hostname, 'dns/show/' . $data->id),
-		       'url' => $data->fqdn,
-		       'ip' => $data->ip,
-		       'enabled' => ($data->enabled)?_("Yes"):_("No"),
-		       'lastcount' => "<span class=\"".$this->lastcountstatus($data->lastcount)."\">".$data->lastcount."</span>",
-		       'updated' => $data->updated,
-		       );
+      $tmp = array(
+		   '_' => $data,
+		   'name' => l($data->hostname, 'dns/show/' . $data->id),
+		   'url' => $data->fqdn,
+		   'ip' => $data->ip,
+		   'enabled' => ($data->enabled)?_("Yes"):_("No"),
+		   'lastcount' => "<span class=\"".$this->lastcountstatus($data->lastcount)."\">".$data->lastcount."</span>",
+		   'updated' => $data->updated,
+		   );
+      if ($allusers) $tmp['user'] = l($data->login, 'users/edit/'.$data->user);
+      $servers[]=$tmp;
     }
     if (count($servers)==0) {
       
@@ -43,18 +66,20 @@ class DnsController extends AController {
 
     $headers = array(
 		     'name' => _('Hostname'),
+		     'url' => _('URL'),
 		     'ip' => _('IP Address'),
 		     'enabled' => _('Enabled'),
-		     'url' => _('URL'),
-		     'lastcount' => _('Last Domain Count'),
+		     'lastcount' => _('Domain Count'),
 		     'updated' => _('Updated on'),
 		     );
+    if ($allusers) $headers['user'] = _("User");
+
     Hooks::call('dns_list_headers', $headers);
     $headers['actions'] = _('Actions');
 
-    $this->render('list', array('servers' => $servers, 'headers' => $headers));
-  }
+    $this->render('list', array('servers' => $servers, 'headers' => $headers, 'allusers' => $allusers));
 
+  }
 
 
   /*
@@ -250,14 +275,31 @@ class DnsController extends AController {
    * Show the last log of a user:
    */
   public function logAction() {
+    $this->log(false);
+  }
+
+  public function alllogAction() {
+    $this->log(true);
+  }
+
+
+  private function log($allusers=false) {
     check_user_identity();
     global $db;
+
+    if ($allusers && !is_admin()) {
+      not_found();
+    }
 
     $uid=intval($GLOBALS['me']['uid']);
     $offset=intval($_REQUEST["offset"]);
     if ($offset<0) $offset=0; 
     $count=100; //intval($_REQUEST["count"]);
-    $st = $db->q("SELECT difflog.*, servers.hostname FROM difflog, servers WHERE servers.id=difflog.server AND servers.user=".$uid." ORDER BY difflog.datec DESC LIMIT ".$offset.",".$count.";");
+    if ($allusers) {
+      $st = $db->q("SELECT difflog.*, servers.hostname, servers.user, users.login FROM difflog, servers, users WHERE servers.id=difflog.server AND servers.user=users.uid ORDER BY difflog.datec DESC LIMIT ".$offset.",".$count.";");
+    } else {
+      $st = $db->q("SELECT difflog.*, servers.hostname FROM difflog, servers WHERE servers.id=difflog.server AND servers.user=".$uid." ORDER BY difflog.datec DESC LIMIT ".$offset.",".$count.";");
+    }
     $servers = array();
     $aaction=array(
 		   0 => _("Timeout connecting to the server"),
@@ -267,33 +309,27 @@ class DnsController extends AController {
 		   4 => _("Zone enabled (no conflict)"),
 		   );
     while ($data = $st->fetch()) {
-      $diff[] = array(
-		       '_' => $data,
-		       'hostname' => l($data->hostname, 'dns/show/' . $data->server),
-		       'action' => $aaction[$data->action],
-		       'zone' => $data->zone,
-		       'datec' => $data->datec,
-		       );
+      $tmp = array(
+		   '_' => $data,
+		   'hostname' => l($data->hostname, 'dns/show/' . $data->server),
+		   'action' => $aaction[$data->action],
+		   'zone' => $data->zone,
+		   'datec' => $data->datec,
+		   );
+      if ($allusers) $tmp['user'] = $data->login;
+      $diff[]= $tmp;
     }
     if (count($diff)==0) {
-      
+      // TODO
     }
-    /*
-    foreach ($diff as $k => $server) {
-      $uid = $server['_']->id;
-      $servers[$k]['actions'] = l(_("Edit"), 'dns/edit/' . $uid) .
-	' | ' . l(_("Delete"), 'dns/delete/' . $uid)
-	;
-    }
-    */
-
+    
     $headers = array(
 		     'hostname' => _('Server Hostname'),
 		     'action' => _('Event'),
 		     'zone' => _('Zone'),
 		     'datec' => _('Date of the event'),
 		     );
-    //    $headers['actions'] = _('Actions');
+    if ($allusers) $headers['user'] = _('User');
     $this->render('diff', array('diff' => $diff, 'headers' => $headers));
   }
 

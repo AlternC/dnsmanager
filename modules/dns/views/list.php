@@ -1,7 +1,12 @@
 <?php
-$title = _('Servers');
-$breadcrumb = array('' => 'Servers');
-$sidebar = '<p>→ ' . l(_("Add a server"), 'dns/add') . '</p>';
+if ($allusers) {
+  $title = _('All Servers');
+  $breadcrumb = array('' => 'All Servers');
+} else {
+  $title = _('Servers');
+  $breadcrumb = array('' => 'Servers');
+  $sidebar = '<p>→ ' . l(_("Add a server"), 'dns/add') . '</p>';
+}
 require VIEWS . '/header.php';
 ?>
 <style>
