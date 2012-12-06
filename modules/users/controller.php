@@ -219,7 +219,7 @@ AlternC's technical team.
 	$this->render("validate",array("errors" => $errors));
 	exit();	
       }
-      $db->qone("UPDATE users SET validate=1 WHERE uid=?",array(intval($_GET['id'])));
+      $db->qone("UPDATE users SET validated=1 WHERE uid=?",array(intval($_GET['id'])));
       $errors[]=_("Your account has been validated, please login to use our services");
       $this->render("validate",array("errors" => $errors));
     }
