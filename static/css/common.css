@@ -41,6 +41,7 @@ body {
     min-width: 960px;
     max-width: 1440px;
     margin: 0 auto;
+    padding-bottom: 60px;
     background-color: #F0F0FA;
     background-image: url(/static/bg2.jpg);
     background-repeat: no-repeat;
