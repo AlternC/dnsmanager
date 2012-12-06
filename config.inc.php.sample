@@ -39,3 +39,12 @@ $db->path = ROOT . '/octomanager.db';
  */
 define('BASE_URL', '/');
 define('STATIC_URL', '/static/');
+define('FULL_URL','https://www.alternc.net/');
+define('MAIL_FROMNAME','AlternC Team');
+define('MAIL_FROM','team@alternc.org');
+
+// hash key (a random string) used by email sending algorithm for new accounts
+define('HASH_KEY','RuleS!sdffxgh');
+
+// Do we allow account creation from the public ? set it to true or false, nothing else 
+define("ALLOW_CREATE_ACCOUNT",false);
