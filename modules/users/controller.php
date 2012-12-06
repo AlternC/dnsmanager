@@ -192,6 +192,8 @@ AlternC's technical team.
     }
   }
 
+
+
     /*
      * Account Created, show a message
      */
@@ -221,6 +223,129 @@ AlternC's technical team.
       $errors[]=_("Your account has been validated, please login to use our services");
       $this->render("validate",array("errors" => $errors));
     }
+
+
+    public function reminderAction() {
+      global $db;
+
+      if (!empty($_GET)) {
+	if (isset($_GET["id"]) && isset($_GET["key"])) {
+	  $id=intval($_GET["id"]);
+	  $key=substr(trim($_GET["key"]),0,16);
+	  $keyok1=substr(md5(HASH_KEY."-".$id."-".intval(time()/86400)),0,16);
+	  $keyok2=substr(md5(HASH_KEY."-".$id."-".intval((time()-86400)/86400)),0,16);
+	  if ($key!=$keyok1 && $key!=$keyok2) {
+	    sleep(5);
+	    $errors[]=_("The link you clicked is invalid. If it is old, please ask again for a password reminder");
+	    $this->render("empty",array("errors" => $errors));
+	    return;
+	  }
+	  // key ok, let's find that user's account and show a password change form.
+	  $me=$db->qone("SELECT * FROM users WHERE uid=?;",array($id));
+	  if (!$me) {
+	    $errors[]=_("User not found, please check your link");
+	    $this->render("empty",array("errors" => $errors));
+            return;
+	  }
+	  $this->render("forgotchangepass",array("errors" => $errors, "id" => $id, "key" => $key ));
+          return;
+	}
+      }
+
+      if (isset($_POST["pass"]) && isset($_POST["id"]) && isset($_POST["pass2"]) && isset($_POST["key"])) {
+	$id=intval($_POST["id"]);
+	$key=substr(trim($_POST["key"]),0,16);
+	$keyok1=substr(md5(HASH_KEY."-".$id."-".intval(time()/86400)),0,16);
+	$keyok2=substr(md5(HASH_KEY."-".$id."-".intval((time()-86400)/86400)),0,16);
+	if ($key!=$keyok1 && $key!=$keyok2) {
+	  sleep(5);
+	  $errors[]=_("The link you clicked is invalid. If it is old, please ask again for a password reminder");
+	  $this->render("empty",array("errors" => $errors));
+	  return;
+	}
+	// key ok, let's change the password
+	$pass=trim($_POST["pass"]);
+	$pass2=trim($_POST["pass2"]);
+	if ($pass!=$pass2) {
+	  $errors[]=_("The password you entered are different, please retry");
+	  $this->render("forgotchangepass",array("errors" => $errors, "id" => $id, "key" => $key ));
+	  return;
+	}
+	// TODO : force a hard password ;) 
+	$db->q("UPDATE users SET pass=ENCRYPT(?,?) WHERE uid=?;",array($pass,$salt,$id) );
+	$errors[]=_("Your password has been successfully changed. You may login now");
+	$this->render("empty",array("errors" => $errors));
+	return;
+      }
+
+    }
+
+
+  /*
+   * I forgot my password...
+   */
+  public function forgotAction() {
+    global $db;
+    $errors = array(); // OK if no problem
+    
+    if (!empty($_POST)) {
+      if (!isset($_POST["email"]) || !$_POST["email"]) {
+	$errors[]=_("Please enter an email address");
+	$this->render("empty",array("errors" => $errors));
+	return;
+      }
+
+      global $db;
+      $args=$db->qone("SELECT * FROM users WHERE email=?",array($_POST['email']),PDO::FETCH_ASSOC);
+      if (!$args) {
+	sleep(5);
+	$errors[]=_("This email is not linked to an account here, sorry.");
+	$this->render("empty",array("errors" => $errors));
+	return;
+      }
+
+      // Send a confirmation mail 
+      $key=substr(md5(HASH_KEY."-".$args["uid"]."-".intval(time()/86400)),0,16);
+      $to      = $args["email"];
+      $subject = _("Your account on AlternC DNS Manager");
+      $message = sprintf(_("
+Hi,
+
+You just asked for your account informations on AlternC DNS Manager.
+
+Your login is %s.
+
+Please click the link below to change your password:
+(warning: this links is only working today)
+
+%s
+
+If you didn't expect this message, you can safely ignore it.
+
+--
+Regards,
+
+AlternC's technical team.
+"),$args["login"],FULL_URL."users/reminder?id=".$args["uid"]."&key=".$key);
+
+	$headers = 'From: '.MAIL_FROMNAME.' <'.MAIL_FROM.'>'. "\r\n" .
+	  'Reply-To: '.MAIL_FROM. "\r\n" .
+	  'Content-type: text/plain; charset=utf-8' . "\r\n" .
+	  'X-Mailer: PHP/' . phpversion();
+	
+	mail($to, $subject, $message, $headers);
+	
+	$error[]=_("A link to reset your password has been sent to your email address. Please click that link (warning, the link is only working one day from now)");
+        // Message + redirection
+	$this->render("forgotok",array("errors"=>$error));
+	return;
+    } else {
+      $this->render('forgot');
+      return;
+    }
+  }
+
+
 
   /*
    * Add a user (for anonymous only)
