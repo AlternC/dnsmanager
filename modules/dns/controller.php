@@ -54,7 +54,9 @@ class DnsController extends AController {
       $servers[]=$tmp;
     }
     if (count($servers)==0) {
-      
+      // Redirect to /dns/add
+      header("Location: /dns/add");
+      exit();
     }
     Hooks::call('dns_list_servers', $servers);
     foreach ($servers as $k => $server) {
@@ -88,7 +90,7 @@ class DnsController extends AController {
   public function showAction($params) {
     check_user_identity();
     global $db;
-
+    $errors=array(); $notice=array();
     $id = intval($params[0]);
     $uid=$GLOBALS['me']['uid'];
     $st = $db->q('SELECT * FROM servers WHERE user=? AND id=?',array($uid,$id));
@@ -133,10 +135,11 @@ class DnsController extends AController {
   }
     
 
-  public function addAction() {
+  public function addAction() { 
+    global $db;
+
     check_user_identity();
-    
-    $errors = array(); // OK if no problem
+    $errors=array(); $notice=array();
     $uid=$GLOBALS['me']['uid'];
 
     if (!empty($_POST)) {
@@ -178,8 +181,11 @@ class DnsController extends AController {
      * on pré-rempli le formulaire avec les données de la saisie.
      */
     $form_data = (empty($_POST)) ? array() : $_POST; 
-
-    $this->render('form', array('op' => 'add', 'data' => $form_data, 'errors' => $errors));
+    $many = $db->qone('SELECT count(*) FROM servers WHERE servers.user=?',array($uid));
+    if ($many==0) {
+      $notice[]=_("You have no server at the moment. Please add one");
+    }
+    $this->render('form', array('op' => 'add', 'data' => $form_data, 'errors' => $errors, 'notice' => $notice));
   }
 
 
@@ -198,8 +204,7 @@ class DnsController extends AController {
 
     if ($server == false)
       not_found();
-
-    $errors = array(); 
+    $errors=array(); $notice=array();
 
     if (!empty($_POST)) {
       $errors = self::verifyForm($_POST, 'edit');
@@ -240,7 +245,7 @@ class DnsController extends AController {
       $form_data = $_POST;
     }
 
-    $this->render('form', array('op' => 'edit', 'hostname' => $server->hostname, 'data' => $form_data, 'errors' => $errors));
+    $this->render('form', array('op' => 'edit', 'hostname' => $server->hostname, 'data' => $form_data, 'errors' => $errors, 'notice' => $notice));
   }
 
 
@@ -340,6 +345,7 @@ class DnsController extends AController {
 
   /* Check a form for the user editor */
   private static function verifyForm($data, $op) {
+    $errors=array(); $notice=array();
     $errors = array();
     if (empty($data['hostname']))
 	$errors[] = _("Please set the hostname of the server. This should be unique between all AlternC DNS Manager accounts");

@@ -27,7 +27,7 @@ require VIEWS . '/header.php';
 
 
 <form action="" method="post">
-  <fieldset style="width: 60%;">
+  <fieldset style="width: 80%;">
   <legend><?php if ($op=="add") __("Add a server in the DNS Manager"); else __("Edit a server in the DNS Manager"); ?></legend>
     <?php input('hostname', _("Hostname:"), 'text', $data['hostname']); ?>
     <?php input('ip', _("IPv4 Address:"), 'text', $data['ip']); ?>
@@ -37,7 +37,7 @@ require VIEWS . '/header.php';
 
   <p><?php __("If you enable the synchronization of DNS zones from your AlternC to this manager, you need to fill the fields below."); ?></p>
 
-  <fieldset style="width: 60%;">
+  <fieldset style="width: 80%;">
     <legend><?php __("AlternC synchronisation"); ?></legend>
 <?php input('url', _("URL:"), 'text', $data['url'],"largeinput"); ?>
 <?php input('cacert', _("CA Certificate:"), 'textarea', $data['cacert'],"certificate"); ?>
