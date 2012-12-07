@@ -12,5 +12,5 @@
 
 <p><?=_("<a href=\"https://alternc.org/\">AlternC</a> is a free software that allows you to control your hosting server easily. As such, it knows how to manage domain names."); ?><br />
 <?=_("However, many users don't have their own DNS servers, or not enough of them. AlternC team decided to provide anybody with free DNS service for their servers running AlternC.");  ?><br />
-<?=_("To use that service, create an account on alternc.net, and add your AlternC's server to your account. <a href=\"http://aide-alternc.org/\">Then read the instructions here</a> to know how to automatically synchronize your server's list of domain names with alternc.net"); ?></p>
+<?=_("To use that service, create an account, and add your AlternC's server to your account. <a href=\"http://aide-alternc.org/\">Read the instructions here</a> to know how to automatically synchronize your server's list of domain names with alternc.net"); ?></p>
 <hr />

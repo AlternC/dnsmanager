@@ -17,7 +17,7 @@ $sidebar = $menu1 . $menu2;
 
 require VIEWS . '/header.php';
 ?>
-
+<?php $this->render("flash",array("errors"=>$errors, "notice"=>$notice)); ?>
 <h2><?php __("General informations"); ?></h2>
 <dl>
   <dt><?php __("Login"); ?></dt>

@@ -4,6 +4,7 @@ $breadcrumb = array('' => 'Users');
 $sidebar = '<p>→ ' . l(_("Create a user"), 'users/add') . '</p>';
 require VIEWS . '/header.php';
 ?>
+<?php $this->render("flash",array("errors"=>$errors, "notice"=>$notice)); ?>
 <style>
   td.col_enabled,
   td.col_admin,

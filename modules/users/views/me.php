@@ -10,7 +10,7 @@ $menu2 = html_list(_("Other informations"), $infos);
 $sidebar = $menu1 . $menu2;
 require VIEWS . '/header.php';
 ?>
-
+<?php $this->render("flash",array("errors"=>$errors, "notice"=>$notice)); ?>
 <table class="col"><tr><td><!-- colonne 1 -->
 
 <h2><?php __("General information"); ?></h2>

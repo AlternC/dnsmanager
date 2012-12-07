@@ -216,6 +216,11 @@ div.error {
     border: 3px double red;
 }
 
+div.notice {
+    color: green;
+    border: 3px double green;
+}
+
 #form_sms_message {
     padding-bottom: 15px;
 }
