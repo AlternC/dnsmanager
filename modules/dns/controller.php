@@ -40,10 +40,15 @@ class DnsController extends AController {
       $st = $db->q('SELECT * FROM servers WHERE user=? ORDER BY hostname',array($uid));
     }
     $servers = array();
+    if (HOSTNAME_DOMAIN) {
+      $sub=".".HOSTNAME_DOMAIN;
+    } else {
+      $sub="";
+    }
     while ($data = $st->fetch()) {
       $tmp = array(
 		   '_' => $data,
-		   'name' => l($data->hostname, 'dns/show/' . $data->id),
+		   'name' => l($data->hostname.$sub, 'dns/show/' . $data->id),
 		   'url' => $data->fqdn,
 		   'ip' => $data->ip,
 		   'enabled' => ($data->enabled)?_("Yes"):_("No"),
@@ -102,6 +107,10 @@ class DnsController extends AController {
       return;
     }
 
+    if (HOSTNAME_DOMAIN) {
+      $server->hostname.=".".HOSTNAME_DOMAIN;
+    }
+
     // List the zones for this server
     $zones = $db->qlist('SELECT * FROM zones WHERE server=? ORDER BY zone',array($id));
 
@@ -114,6 +123,8 @@ class DnsController extends AController {
 		   3 => _("Zone deleted"),
 		   4 => _("Zone enabled (no conflict)"),
 		   5 => _("Empty file received from server"),
+		   6 => _("Statistics of the DNS Manager"),
+		   7 => _("Server deleted, all zone removed"),
 		   );
     while ($data = $st->fetch()) {
       $diff[] = array(
@@ -154,6 +165,7 @@ class DnsController extends AController {
 	if (!$id) {
 	  $errors[]=_("An error occurred, please try again later");	  
 	} else {
+	  touch(MARKUP_FILE);
 	  $args = array(
 			'id' => $id,
 			'hostname' => $_POST['hostname'],
@@ -220,7 +232,13 @@ class DnsController extends AController {
 		     $server->id,
                      )
                );
-
+	if ($server["hostname"]!=$_POST["hostname"]) {
+	  touch(MARKUP_FILE);
+	}
+	if ($server["ip"]!=$_POST["ip"] && $server["lastcount"]>0 && $server["enabled"]) {
+	  // The server's IP changed, reload his zone list!
+	  touch(FORCE_NEXT);
+	}
         // Message + redirection
 	header('Location: ' . BASE_URL . 'dns/show/' . $server->id . '?msg=' . _("Server successfully updated"));
 	exit;
@@ -264,7 +282,11 @@ class DnsController extends AController {
 
     if (!empty($_POST['op'])) {
 	$db->q('DELETE FROM servers WHERE id=?', array($id));
-	// TODO : delete the zones and force reload of BIND ! > launch sync in force mode !
+	$db->q('DELETE FROM zone WHERE server=?',array($id));
+	$db->q('INSERT INTO difflog SET server=?, action=?, datec=NOW()',array($id,DIFF_ACTION_DELETE_SERVER));
+	
+	touch(MARKUP_FILE);
+	touch(FORCE_NEXT);
 	$args = array($server);
 	Hooks::call('server_delete', $args);
         // Message + redirection

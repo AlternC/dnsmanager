@@ -7,5 +7,7 @@ define("DIFF_ACTION_DELETED",3); // Zone deleted
 define("DIFF_ACTION_ENABLED",4); // Zone enabled because conflict disappeared
 define("DIFF_ACTION_EMPTY",5); // domlist page returned empty file.
 define("DIFF_ACTION_STATS",6); // log entry is statistics
+define("DIFF_ACTION_DELETE_SERVER",7); // This server entry was deleted.
+
 
 
