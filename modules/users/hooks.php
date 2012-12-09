@@ -50,10 +50,10 @@ class UsersHooks  extends AHooks {
    */
   public function content_top(&$html) {
     if (!empty($GLOBALS['me']['impersonator'])) {
-      $msg = sprintf(_("En vrai, vous êtes %s et vous vous faites passer pour %s."),
+      $msg = sprintf(_("You are %s and you are connected as %s.");
                      $GLOBALS['me']['impersonator']['login'],
                      $GLOBALS['me']['login']) . ' ' .
-        '<a href="' . BASE_URL . 'users/stopimpersonate">' . _("Arrêter l'usurpation d'identité.") . '</a>';
+        '<a href="' . BASE_URL . 'users/stopimpersonate">' . _("Go back to my admin account identity.") . '</a>';
       $html[] = '<p>' . $msg . '</p>';
     }
   }

@@ -8,7 +8,7 @@ require VIEWS . '/header.php';
 
 <form action="" method="post">
   <p><?php echo sprintf(_("Do you really want to delete user '%s'?"), $user->login); ?></p>
-  <p><?php __("This will delete all its associated media"); ?></p>
+  <p><?php __("This will delete all its associated servers and zones"); ?></p>
   <?php
      $informations = array($user);
      Hooks::call('users_delete_infos', $informations);

@@ -1,0 +1,869 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Benjamin Sonntag <benjamin@sonntag.fr>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AlternC-dnsmanager 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-08 11:24+0100\n"
+"PO-Revision-Date: 2012-12-09 16:09+0100\n"
+"Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
+"Language-Team: français <team@alternc.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bits\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: common.php:25
+msgid "Cannot connect to the database:"
+msgstr "Impossible de se connecter à la base de données :"
+
+#: libs/utils.php:22
+msgid "Page Not Found"
+msgstr "Page non trouvée"
+
+#: libs/utils.php:22
+msgid ""
+"The requested page has not been found or an error happened. Please check"
+msgstr ""
+"La page demandée n'a pas été trouvée, ou une erreur est survenue. Merci de "
+"vérifier."
+
+#: libs/Db.php:100
+msgid "Erreur base de données PDO prepare :"
+msgstr "Erreur base de données PDO lors du prepare :"
+
+#: views/header.php:27
+#, php-format
+msgid "Connected as %s"
+msgstr "Connecté à %s"
+
+#: views/menu.php:17
+msgid "Plus ↓"
+msgstr "Plus ↓"
+
+#: public/index.php:14
+msgid "Error:"
+msgstr "Erreur :"
+
+#: modules/dns/hooks.php:6
+msgid "My Servers"
+msgstr "Mes serveurs"
+
+#: modules/dns/hooks.php:10
+msgid "Server Logs"
+msgstr "Historique Serveur"
+
+#: modules/dns/hooks.php:18 modules/dns/views/list.php:3
+msgid "All Servers"
+msgstr "Tous les serveurs"
+
+#: modules/dns/hooks.php:22
+msgid "All Server Logs"
+msgstr "Tous l'historique"
+
+#: modules/dns/views/me.php:2
+msgid ""
+"Welcome into the AlternC DNS Manager. Click on the My Servers page above to "
+"add or edit your AlternC's servers"
+msgstr ""
+"Bienvenue sur le Gestionnaire de DNS AlternC. Cliquez sur \"Mes serveurs\" "
+"ci-dessus pour ajouter ou modifier vos serveurs sous AlternC."
+
+#: modules/dns/views/form.php:4 modules/dns/views/form.php:7
+#: modules/dns/views/show.php:3 modules/dns/views/list.php:6
+msgid "Servers"
+msgstr "Serveurs"
+
+#: modules/dns/views/form.php:4 modules/users/views/form.php:4
+msgid "Modifier"
+msgstr ""
+
+#: modules/dns/views/form.php:6 modules/dns/views/list.php:8
+msgid "Add a server"
+msgstr "Ajouter un serveur"
+
+#: modules/dns/views/form.php:7 modules/users/views/form.php:12
+msgid "Add"
+msgstr "Ajouter"
+
+#: modules/dns/views/form.php:31
+msgid "Add a server in the DNS Manager"
+msgstr "Ajouter un serveur dans le Gestionnaire DNS"
+
+#: modules/dns/views/form.php:31
+msgid "Edit a server in the DNS Manager"
+msgstr "Modifier un serveur du Gestionnaire DNS"
+
+#: modules/dns/views/form.php:32
+msgid "Hostname:"
+msgstr "Nom d'hôte :"
+
+#: modules/dns/views/form.php:33
+msgid "IPv4 Address:"
+msgstr "Adresse IPv4 :"
+
+#: modules/dns/views/form.php:35
+msgid "Enable DNS synchronization using AlternC's protocol?"
+msgstr "Activer la synchronisation DNS utilisant le protocole d'AlternC ?"
+
+#: modules/dns/views/form.php:38
+msgid ""
+"If you enable the synchronization of DNS zones from your AlternC to this "
+"manager, you need to fill the fields below."
+msgstr ""
+"Si vous activez la synchronisation de la liste des zones DNS depuis votre "
+"AlternC sur le gestionnaire, vous devez remplir les champs ci-dessous."
+
+#: modules/dns/views/form.php:41
+msgid "AlternC synchronisation"
+msgstr "Synchronisation AlternC"
+
+#: modules/dns/views/form.php:42
+msgid "URL:"
+msgstr "URL :"
+
+#: modules/dns/views/form.php:43
+msgid "CA Certificate:"
+msgstr "Certificat de CA :"
+
+#: modules/dns/views/form.php:44
+msgid ""
+"You must have created a SlaveDNS account in the administrator panel of "
+"AlternC."
+msgstr ""
+"Vous devrez avoir créé un compte Esclave DNS dans le panneau administrateur "
+"d'AlternC."
+
+#: modules/dns/views/form.php:45
+msgid ""
+"The url is usually like https://login:password@panel.yourserver.tld/domlist."
+"php"
+msgstr ""
+"L'url est généralement du type https://utilisateur:motdepasse@panel."
+"votreserveur.tld/domlist.php"
+
+#: modules/dns/views/form.php:46
+msgid ""
+"If you don't have a proper CA-signed certificate, you can paste here your "
+"self-signed certificate."
+msgstr ""
+"Si vous ne disposez pas d'un certificat signé par une autorité de "
+"certification, vous pouvez coller ici votre certificat auto-signé."
+
+#: modules/dns/views/form.php:49
+msgid "Add this server"
+msgstr "Ajouter ce serveur"
+
+#: modules/dns/views/form.php:50 modules/dns/views/show.php:7
+msgid "Edit this server"
+msgstr "Modifier ce serveur"
+
+#: modules/dns/views/form.php:51 modules/users/views/form.php:48
+#: modules/users/views/home.php:34
+msgid "Cancel"
+msgstr "Annuler"
+
+#: modules/dns/views/delete.php:3 modules/users/views/delete.php:3
+msgid "Supprimer"
+msgstr ""
+
+#: modules/dns/views/delete.php:8
+#, php-format
+msgid "Do you really want to delete server '%s'?"
+msgstr "Voulez-vous réellement supprimer le serveur '%s' ?"
+
+#: modules/dns/views/delete.php:16 modules/users/views/delete.php:19
+msgid "Yes, delete it"
+msgstr "Oui, supprimer"
+
+#: modules/dns/views/delete.php:17 modules/users/views/delete.php:20
+msgid "No, don't do anything"
+msgstr "Non, ne rien faire"
+
+#: modules/dns/views/diff.php:2
+msgid "Servers synchronization log"
+msgstr "Historique de synchronisation des serveurs"
+
+#: modules/dns/views/show.php:35
+msgid "Server informations"
+msgstr "Informations du serveur"
+
+#: modules/dns/views/show.php:37 modules/dns/controller.php:75
+msgid "Hostname"
+msgstr "Nom d'hôte"
+
+#: modules/dns/views/show.php:40
+msgid "IPv4 Address"
+msgstr "Adresse IPv4"
+
+#: modules/dns/views/show.php:43
+msgid "AlternC synchronization enabled ?"
+msgstr "Synchronisation via AlternC active ?"
+
+#: modules/dns/views/show.php:44 modules/dns/controller.php:54
+msgid "Yes"
+msgstr "Oui"
+
+#: modules/dns/views/show.php:44 modules/dns/controller.php:54
+msgid "No"
+msgstr "Non"
+
+#: modules/dns/views/show.php:46 modules/dns/controller.php:76
+msgid "URL"
+msgstr "URL"
+
+#: modules/dns/views/show.php:49
+msgid "SSL Certificate (when needed)"
+msgstr "Certificat SSL (si besoin)"
+
+#: modules/dns/views/show.php:63
+msgid "Zone hosted in that server"
+msgstr "Zones hébergées sur ce serveur"
+
+#: modules/dns/views/show.php:70
+msgid "DISABLED (conflict)"
+msgstr "INACTIF (conflit)"
+
+#: modules/dns/views/show.php:80
+msgid "Last log for this server"
+msgstr "Derniers événements du serveur"
+
+#: modules/dns/controller.php:69 modules/users/views/me.php:5
+#: modules/users/views/form.php:8 modules/users/views/show.php:6
+#: modules/users/controller.php:38
+msgid "Edit"
+msgstr "Modifier"
+
+#: modules/dns/controller.php:70 modules/users/views/show.php:7
+#: modules/users/controller.php:39
+msgid "Delete"
+msgstr "Effacer"
+
+#: modules/dns/controller.php:77
+msgid "IP Address"
+msgstr "Adresse IP"
+
+#: modules/dns/controller.php:78 modules/users/controller.php:46
+msgid "Enabled"
+msgstr "Actif"
+
+#: modules/dns/controller.php:79
+msgid "Domain Count"
+msgstr "Nombre de domaines"
+
+#: modules/dns/controller.php:80
+msgid "Updated on"
+msgstr "Mis à jour le"
+
+#: modules/dns/controller.php:82 modules/dns/controller.php:359
+msgid "User"
+msgstr "Utilisateur"
+
+#: modules/dns/controller.php:85 modules/users/views/me.php:5
+#: modules/users/views/show.php:5 modules/users/controller.php:50
+msgid "Actions"
+msgstr "Actions"
+
+#: modules/dns/controller.php:105
+msgid "Server not found"
+msgstr "Serveur non trouvé"
+
+#: modules/dns/controller.php:120 modules/dns/controller.php:332
+msgid "Timeout connecting to the server"
+msgstr "Temps dépassé à la connexion du serveur"
+
+#: modules/dns/controller.php:121 modules/dns/controller.php:333
+msgid "Zone added"
+msgstr "Zone ajoutée"
+
+#: modules/dns/controller.php:122 modules/dns/controller.php:334
+msgid "Zone added but disabled (conflict)"
+msgstr "Aone ajoutée mais inactive (conflit)"
+
+#: modules/dns/controller.php:123 modules/dns/controller.php:335
+msgid "Zone deleted"
+msgstr "Zone effacée"
+
+#: modules/dns/controller.php:124 modules/dns/controller.php:336
+msgid "Zone enabled (no conflict)"
+msgstr "Zone activée (plus de conflit)"
+
+#: modules/dns/controller.php:125
+msgid "Empty file received from server"
+msgstr "Fichier vide reçu du serveur "
+
+#: modules/dns/controller.php:126
+msgid "Statistics of the DNS Manager"
+msgstr "Statistiques du gestionnaire de DNS"
+
+#: modules/dns/controller.php:127
+msgid "Server deleted, all zone removed"
+msgstr "Serveur supprimé, ainsi que ses zones"
+
+#: modules/dns/controller.php:139 modules/dns/controller.php:355
+msgid "Event"
+msgstr "Événement"
+
+#: modules/dns/controller.php:140 modules/dns/controller.php:356
+msgid "Zone"
+msgstr "Zone"
+
+#: modules/dns/controller.php:141 modules/dns/controller.php:357
+msgid "Date of the event"
+msgstr "Date de l'événement"
+
+#: modules/dns/controller.php:166
+msgid "An error occurred, please try again later"
+msgstr "Une erreur est survenue, réessayez plus tard"
+
+#: modules/dns/controller.php:179
+msgid "Server Added..."
+msgstr "Serveur ajouté..."
+
+#: modules/dns/controller.php:198
+msgid "You have no server at the moment. Please add one"
+msgstr ""
+"Vous n'avez pas de serveur de défini pour l'instant. Merci d'en créer un"
+
+#: modules/dns/controller.php:243
+msgid "Server successfully updated"
+msgstr "Serveur mis à jour "
+
+#: modules/dns/controller.php:293
+#, php-format
+msgid "Server %s successfully deleted"
+msgstr "Serveur %s effacé"
+
+#: modules/dns/controller.php:354
+msgid "Server Hostname"
+msgstr "Nom d'hôte du serveur"
+
+#: modules/dns/controller.php:373
+msgid ""
+"Please set the hostname of the server. This should be unique between all "
+"AlternC DNS Manager accounts"
+msgstr ""
+"Merci de renseigner le nom d'hôte du serveur. Il doit être unique sur tout "
+"le gestionnaire de DNS d'AlternC"
+
+#: modules/dns/controller.php:375
+msgid "Please set the public IPv4 address of the server."
+msgstr "Merci de renseigner l'adresse IPv4 du serveur."
+
+#: modules/index/hooks.php:7
+msgid "Home"
+msgstr "Accueil"
+
+#: modules/index/views/index.php:8
+msgid "Welcome"
+msgstr "Bienvenue"
+
+#: modules/users/hooks.php:15
+msgid "User Management"
+msgstr "Gestion des utilisateurs"
+
+#: modules/users/hooks.php:53
+#, php-format
+msgid "En vrai, vous êtes %s et vous vous faites passer pour %s."
+msgstr ""
+
+#: modules/users/hooks.php:56
+msgid "Arrêter l'usurpation d'identité."
+msgstr ""
+
+#: modules/users/views/forgotchangepass.php:2
+#: modules/users/views/forgotchangepass.php:17
+msgid "Change my password"
+msgstr "Changer mon mot de passe"
+
+#: modules/users/views/forgotchangepass.php:13
+msgid "Enter your new password:"
+msgstr "Entrez votre mot de passe :"
+
+#: modules/users/views/forgotchangepass.php:14
+msgid "Enter your new password (again):"
+msgstr "Entrez votre mot de passe (à nouveau) :"
+
+#: modules/users/views/me.php:2 modules/users/views/form.php:8
+msgid "My account"
+msgstr "Mon compte"
+
+#: modules/users/views/me.php:9 modules/users/views/show.php:13
+msgid "Other informations"
+msgstr "Autres informations"
+
+#: modules/users/views/me.php:16
+msgid "General information"
+msgstr "Informations générales"
+
+#: modules/users/views/me.php:18 modules/users/views/show.php:23
+msgid "Login"
+msgstr "Nom d'utilisateur"
+
+#: modules/users/views/me.php:21 modules/users/views/form.php:37
+#: modules/users/views/show.php:26 modules/users/views/home.php:31
+msgid "Email address"
+msgstr "Adresse email"
+
+#: modules/users/views/form.php:7
+msgid "Edit my account"
+msgstr "Modifier mon compte"
+
+#: modules/users/views/form.php:11 modules/users/views/list.php:4
+msgid "Create a user"
+msgstr "Créer un compte"
+
+#: modules/users/views/form.php:20
+msgid "Identity"
+msgstr "Identité"
+
+#: modules/users/views/form.php:22
+msgid "Login:"
+msgstr "Nom d'utilisateur :"
+
+#: modules/users/views/form.php:26
+msgid "Keep this empty if you don't want to change the password"
+msgstr "Laissez ce champ vide pour ne pas modifier votre mot de passe"
+
+#: modules/users/views/form.php:28
+msgid "Password:"
+msgstr "Mot de passe :"
+
+#: modules/users/views/form.php:29 modules/users/views/home.php:29
+msgid "Password (confirmation):"
+msgstr "Mot de passe (confirmation) :"
+
+#: modules/users/views/form.php:31
+msgid "Send the password by mail"
+msgstr "Envoyer le mot de passe par mail"
+
+#: modules/users/views/form.php:33
+msgid "Send a mail telling about that new account"
+msgstr "Envoyer un mail au sujet du nouveau compte"
+
+#: modules/users/views/form.php:39
+msgid "Is it an administrator?"
+msgstr "Est-ce un administrateur ?"
+
+#: modules/users/views/form.php:40
+msgid "Is it enabled?"
+msgstr "Est-il actif ?"
+
+#: modules/users/views/form.php:45
+msgid "Add this user"
+msgstr "Ajouter ce compte"
+
+#: modules/users/views/form.php:46
+msgid "Edit this user"
+msgstr "Modifier ce compte"
+
+#: modules/users/views/form.php:47
+msgid "Change my infos"
+msgstr "Changer mes informations"
+
+#: modules/users/views/delete.php:10
+#, php-format
+msgid "Do you really want to delete user '%s'?"
+msgstr "Voulez-vous réellement supprimer l'utilisateur '%s' ?"
+
+#: modules/users/views/delete.php:11
+msgid "This will delete all its associated media"
+msgstr ""
+
+#: modules/users/views/empty.php:2
+msgid "AlternC DNS Manager"
+msgstr "Gestionnaire de DNS d'AlternC"
+
+#: modules/users/views/createok.php:6 modules/users/views/validate.php:6
+msgid "Account Creation"
+msgstr "Création d'un compte"
+
+#: modules/users/views/createok.php:7
+msgid ""
+"Your account has been created successfully, an email with a confirmation "
+"link has been sent to you"
+msgstr ""
+"Votre compte a été créé avec succès, un email de confirmation vous a été "
+"envoyé."
+
+#: modules/users/views/show.php:8
+msgid "Connect As"
+msgstr "Se connecter sous"
+
+#: modules/users/views/show.php:21
+msgid "General informations"
+msgstr "Informations générales"
+
+#: modules/users/views/show.php:29
+msgid "Enabled?"
+msgstr "Actif ?"
+
+#: modules/users/views/show.php:32
+msgid "Administrator?"
+msgstr "Administrateur ?"
+
+#: modules/users/views/forgot.php:2 modules/users/views/forgotok.php:2
+#: modules/users/views/home.php:15
+msgid "I forgot my password"
+msgstr "J'ai oublié mon mot de passe"
+
+#: modules/users/views/forgot.php:11
+msgid "Enter your email:"
+msgstr "Entrez votre email :"
+
+#: modules/users/views/forgot.php:12
+msgid ""
+"If you forgot your login or password, please enter your email above, we will "
+"send you a link to reset your password."
+msgstr ""
+"Si vous avez oublié votre nom d'utilisateur ou votre mot de passe, entrez "
+"votre email ci-dessus, nous vous enverrons un lien pour réinitialiser votre "
+"mot de passe."
+
+#: modules/users/views/forgot.php:15
+msgid "Send me a password reminder"
+msgstr "Envoyez-moi un rappel de mot de passe"
+
+#: modules/users/views/createform.php:2
+msgid "Account Creation Form"
+msgstr "Formulaire de création de compte"
+
+#: modules/users/views/list.php:2
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: modules/users/views/home.php:4
+msgid ""
+"Welcome into AlternC DNS Manager. You can either log into your existing "
+"account, or create an new account."
+msgstr ""
+"Bienvenue dans le Gestionnaire de DNS d'AlternC. Vous pouvez soit vous "
+"connecter à votre compte, soit créer un nouveau compte."
+
+#: modules/users/views/home.php:6
+msgid "Welcome into AlternC DNS Manager. Please login into your account"
+msgstr ""
+"Bienvenue dans le Gestionnaire de DNS d'AlternC. Merci de vous connecter à "
+"votre compte."
+
+#: modules/users/views/home.php:12
+msgid "Existing Users"
+msgstr "Utilisateurs existants"
+
+#: modules/users/views/home.php:14
+msgid "Log into my account"
+msgstr "Se connecter à mon compte"
+
+#: modules/users/views/home.php:24
+msgid "New Users"
+msgstr "Nouveaux utilisateurs"
+
+#: modules/users/views/home.php:27
+msgid "Choose a login name:"
+msgstr "Choisissez un nom d'utilisateur :"
+
+#: modules/users/views/home.php:28
+msgid "Create a password:"
+msgstr "Choisissez un mot de passe :"
+
+#: modules/users/views/home.php:33
+msgid "Create an account and send me a confirmation email"
+msgstr "Créez ce compte et envoyez-moi un email de confirmation"
+
+#: modules/users/scripts/gen-htpasswd.php:10
+msgid "Erreur lors de la connexion à la base de données."
+msgstr "Erreur lors de la connexion à la base de données."
+
+#: modules/users/controller.php:40
+msgid "Connect as"
+msgstr "Se connecter sous "
+
+#: modules/users/controller.php:44
+msgid "Name"
+msgstr "Nom"
+
+#: modules/users/controller.php:45
+msgid "Email"
+msgstr "Email"
+
+#: modules/users/controller.php:47
+msgid "Admin."
+msgstr "Admin."
+
+#: modules/users/controller.php:73 modules/users/controller.php:81
+msgid "yes"
+msgstr "oui"
+
+#: modules/users/controller.php:73 modules/users/controller.php:81
+msgid "no"
+msgstr "non"
+
+#: modules/users/controller.php:95
+msgid "Please set the login name"
+msgstr "Merci de renseigner le nom d'utilisateur"
+
+#: modules/users/controller.php:101
+msgid "Please set a password"
+msgstr "Merci de renseigner le mot de passe"
+
+#: modules/users/controller.php:103 modules/users/controller.php:108
+msgid "The passwords are different, please check"
+msgstr "Les mots de passes sont différents, merci de vérifier."
+
+#: modules/users/controller.php:112
+msgid "The email address is mandatory"
+msgstr "L'adresse email est obligatoire"
+
+#: modules/users/controller.php:153 modules/users/controller.php:309
+#: modules/users/controller.php:659
+msgid "Your account on AlternC DNS Manager"
+msgstr "Votre compte sur le Gestionnaire DNS AlternC"
+
+#: modules/users/controller.php:154
+#, php-format
+msgid ""
+"\n"
+"Hi,\n"
+"\n"
+"Your account on AlternC DNS Manager has just been created.\n"
+"\n"
+"Please click the link below to activate it:\n"
+"\n"
+"%s\n"
+"\n"
+"If you didn't expect this message, please ignore it\n"
+"\n"
+"--\n"
+"Regards,\n"
+"\n"
+"AlternC's technical team.\n"
+msgstr ""
+"\n"
+"Bonjour,\n"
+"\n"
+"Votre compte sur le Gestionnaire de DNS AlternC vient d'être créé\n"
+"\n"
+"Merci de cliquer sur le lien ci-dessous pour l'activer : \n"
+"\n"
+"%s\n"
+"\n"
+"Si vous n'attendiez pas ce message, vous pouvez l'ignorer.\n"
+"\n"
+"--\n"
+"Cordialement,\n"
+"\n"
+"L'équipe technique d'AlternC.\n"
+
+#: modules/users/controller.php:212
+msgid "Your account has not been found, please check the link"
+msgstr "Votre compte n'a pas été trouvé, merci de vérifier le lien"
+
+#: modules/users/controller.php:217
+msgid "The key is missing or not correct, please check"
+msgstr "La clé manque ou est incorrecte, merci de vérifier"
+
+#: modules/users/controller.php:222
+msgid "Your account has been validated, please login to declare your servers"
+msgstr "Votre compte a été validé, connectez-vous pour inscrire vos serveurs"
+
+#: modules/users/controller.php:238 modules/users/controller.php:261
+msgid ""
+"The link you clicked is invalid. If it is old, please ask again for a "
+"password reminder"
+msgstr ""
+"Le lien que vous avez cliqué est invalide. S'il est ancien, re-demandez un "
+"rappel de mot de passe"
+
+#: modules/users/controller.php:245
+msgid "User not found, please check your link"
+msgstr "Utilisateur non trouvé, vérifiez votre lien"
+
+#: modules/users/controller.php:269
+msgid "The password you entered are different, please retry"
+msgstr "Les mots de passe que vous avez entré sont différents, réessayez "
+
+#: modules/users/controller.php:275
+msgid "Your password has been successfully changed. You may login now"
+msgstr ""
+"Votre mot de passe a été modifié avec succès. Vous pouvez maintenant vous "
+"connecter"
+
+#: modules/users/controller.php:292
+msgid "Please enter an email address"
+msgstr "Entrez une adresse email"
+
+#: modules/users/controller.php:301
+msgid "This email is not linked to an account here, sorry."
+msgstr "Cet email n'est pas lié à un compte ici, désolé."
+
+#: modules/users/controller.php:310
+#, php-format
+msgid ""
+"\n"
+"Hi,\n"
+"\n"
+"You just asked for your account informations on AlternC DNS Manager.\n"
+"\n"
+"Your login is %s.\n"
+"\n"
+"Please click the link below to change your password:\n"
+"(warning: this links is only working today)\n"
+"\n"
+"%s\n"
+"\n"
+"If you didn't expect this message, you can safely ignore it.\n"
+"\n"
+"--\n"
+"Regards,\n"
+"\n"
+"AlternC's technical team.\n"
+msgstr ""
+"\n"
+"Bonjour,\n"
+"\n"
+"Vous venez de nous demander les informations de votre compte sur le "
+"Gestionnaire de DNS AlternC.\n"
+"\n"
+"Votre nom d'utilisateur est : %s\n"
+"\n"
+"Merci de cliquer sur le lien ci-dessous pour modifier votre mot de passe : \n"
+"(attention, ce lien ne marche qu'aujourd'hui)\n"
+"\n"
+"%s\n"
+"\n"
+"Si vous n'attendiez pas ce message, vous pouvez l'ignorer.\n"
+"\n"
+"--\n"
+"Cordialement,\n"
+"L'équipe technique d'AlternC.\n"
+
+#: modules/users/controller.php:337
+msgid ""
+"A link to reset your password has been sent to your email address. Please "
+"click that link (warning, the link is only working one day from now)"
+msgstr ""
+"Un lien permettant de modifier votre mot de passe a été envoyé à votre "
+"adresse email. Cliquez sur ce lien (attention, il ne fonctionnera que "
+"pendant un jour à partir de maintenant)"
+
+#: modules/users/controller.php:389
+msgid "Ajout OK..."
+msgstr ""
+
+#: modules/users/controller.php:466 modules/users/controller.php:590
+msgid "Mise à jour OK..."
+msgstr ""
+
+#: modules/users/controller.php:508
+msgid "Yes, Delete"
+msgstr "Oui, effacer"
+
+#: modules/users/controller.php:513
+#, php-format
+msgid "User %s successfully deleted"
+msgstr "Utilisateur %s effacé avec succès"
+
+#: modules/users/controller.php:518
+msgid "Nothing has been deleted"
+msgstr "Rien n'a été effacé"
+
+#: modules/users/controller.php:632
+msgid "Password change on AlternC DNS Manager"
+msgstr "Changement de mot de passe sur le Gestionnaire de DNS AlternC"
+
+#: modules/users/controller.php:633
+#, php-format
+msgid ""
+"\n"
+"Bonjour,\n"
+"\n"
+"le mot de passe de votre compte sur le DNS Manager AlternC vient d'être "
+"modifié.\n"
+"\n"
+"Vous pouvez y accéder à l'adresse : %s\n"
+"\n"
+"Votre nom d'utilisateur est : %s\n"
+"Votre mot de passe est : %s\n"
+"\n"
+"--\n"
+"Cordialement,\n"
+"\n"
+"L'équipe technique\n"
+msgstr ""
+
+#: modules/users/controller.php:660
+#, php-format
+msgid ""
+"\n"
+"Bonjour,\n"
+"\n"
+"votre compte sur le DNS Manager AlternC vient d'être créé.\n"
+"\n"
+"Vous pouvez y accéder à l'adresse : %s\n"
+"\n"
+"Votre nom d'utilisateur est : %s\n"
+"Votre mot de passe est : %s\n"
+"\n"
+"Nous vous invitons à le modifier en cliquant sur 'Mon compte' puis "
+"'Modifier'\n"
+"\n"
+"--\n"
+"Cordialement,\n"
+"\n"
+"L'équipe technique \n"
+msgstr ""
+
+#: modules/alternc/views/home.php:3
+msgid ""
+"The domains you host in your server should have the following DNS servers:"
+msgstr ""
+"Les domaines que vous hébergez sur votre serveur doivent avoir les Serveurs "
+"DNS suivants : "
+
+#: modules/alternc/views/home.php:13
+msgid ""
+"<a href=\"https://alternc.org/\">AlternC</a> is a free software that allows "
+"you to control your hosting server easily. As such, it knows how to manage "
+"domain names."
+msgstr ""
+"<a href=\"https://alternc.org/\">AlternC</a> est un logiciel libre qui vous "
+"permet de contrôler votre serveur d'hébergement facilement. Il permet donc "
+"de gérer des noms de domaines."
+
+#: modules/alternc/views/home.php:14
+msgid ""
+"However, many users don't have their own DNS servers, or not enough of them. "
+"AlternC team decided to provide anybody with free DNS service for their "
+"servers running AlternC."
+msgstr ""
+"Cependant, de nombreux utilisateurs n'ont pas leurs propres serveurs DNS, ou "
+"pas assez. L'équipe d'AlternC fournit donc gracieusement un service de DNS à "
+"toute personne ayant un serveur faisant tourner AlternC."
+
+#: modules/alternc/views/home.php:15
+msgid ""
+"To use that service, create an account, and add your AlternC's server to "
+"your account. <a href=\"http://aide-alternc.org/\">Read the instructions "
+"here</a> to know how to automatically synchronize your server's list of "
+"domain names with alternc.net"
+msgstr ""
+"Pour utiliser ce service, créez-vous un compte ici, et ajoutez votre serveur "
+"sous AlternC à votre compte. <a href=\"http://aide-alternc.org/\">Lisez les "
+"instructions ici</a> pour savoir comment synchroniser automatiquement la "
+"liste des domaines de votre serveur avec alternc.net."
+
+#: modules/alternc/views/home.php:16
+msgid ""
+"For each server you have, we will point a subdomain of <i>alternc.net</i> to "
+"your server's IP address. Thanks to that, your server will have a name on "
+"the Internet even if you didn't install any domain inside it yet."
+msgstr ""
+"Pour chaque serveur que vous possédez, nous pointerons un sous-domaine de "
+"<i>alternc.net</i> vers l'IPv4 de votre serveur. Grâce à ce la, votre "
+"serveur aura un nom sur Internet avant même que vous ayez installé un "
+"domaine dessus."

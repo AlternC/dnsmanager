@@ -386,7 +386,7 @@ AlternC's technical team.
 	Hooks::call('users_add', $args);
 
         // Message + redirection
-	header('Location: ' . BASE_URL . 'users/show/' . $uid . '?msg=' . _("Ajout OK..."));
+	header('Location: ' . BASE_URL . 'users/show/' . $uid );
 	exit;
       }
     }
@@ -463,7 +463,7 @@ AlternC's technical team.
 	}
 
         // Message + redirection
-	header('Location: ' . BASE_URL . 'users/show/' . $user->uid . '?msg=' . _("Mise à jour OK..."));
+	header('Location: ' . BASE_URL . 'users/show/' . $user->uid );
 	exit;
       }
     }
