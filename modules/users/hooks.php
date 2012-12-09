@@ -50,7 +50,7 @@ class UsersHooks  extends AHooks {
    */
   public function content_top(&$html) {
     if (!empty($GLOBALS['me']['impersonator'])) {
-      $msg = sprintf(_("You are %s and you are connected as %s.");
+      $msg = sprintf(_("You are %s and you are connected as %s."),
                      $GLOBALS['me']['impersonator']['login'],
                      $GLOBALS['me']['login']) . ' ' .
         '<a href="' . BASE_URL . 'users/stopimpersonate">' . _("Go back to my admin account identity.") . '</a>';
