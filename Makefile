@@ -15,8 +15,9 @@ locales: ./locales/en_US/LC_MESSAGES/default.mo ./locales/fr_FR/LC_MESSAGES/defa
 	msgfmt $^ -o $@
 
 ./locales/%/LC_MESSAGES/default.po: ./locales/default.pot ./locales/%/LC_MESSAGES
-	cp $< $@
-	msgmerge -v -U $@ $<
+#	cp $< $@
+#	msgmerge -v -U $@ $^
+	msgmerge -v -U $@ ./locales/default.pot
 
 ./locales/%/LC_MESSAGES:
 	mkdir -p $@

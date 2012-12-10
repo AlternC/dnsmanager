@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-08 11:24+0100\n"
+"POT-Creation-Date: 2012-12-10 19:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,7 +227,7 @@ msgid "Edit"
 msgstr ""
 
 #: modules/dns/controller.php:70 modules/users/views/show.php:7
-#: modules/users/controller.php:39
+#: modules/users/controller.php:39 modules/dns/views/delete.php:3
 msgid "Delete"
 msgstr ""
 
@@ -293,10 +293,12 @@ msgid "Server deleted, all zone removed"
 msgstr ""
 
 #: modules/dns/controller.php:139 modules/dns/controller.php:355
+#: modules/dns/views/show.php:81
 msgid "Event"
 msgstr ""
 
 #: modules/dns/controller.php:140 modules/dns/controller.php:356
+#: modules/dns/views/show.php:64 modules/dns/views/show.php:81
 msgid "Zone"
 msgstr ""
 
@@ -785,4 +787,25 @@ msgid ""
 "For each server you have, we will point a subdomain of <i>alternc.net</i> to "
 "your server's IP address. Thanks to that, your server will have a name on "
 "the Internet even if you didn't install any domain inside it yet."
+msgstr ""
+
+#: modules/users/hooks.php:53
+#, php-format
+msgid "You are %s and you are connected as %s."
+msgstr ""
+
+#: modules/users/hooks.php:56
+msgid "Go back to my admin account identity."
+msgstr ""
+
+#: modules/users/views/delete.php:11
+msgid "This will delete all its associated servers and zones"
+msgstr ""
+
+#: modules/dns/views/show.php:64
+msgid "Date"
+msgstr ""
+
+#: modules/dns/views/show.php:81
+msgid "Date/Hour"
 msgstr ""

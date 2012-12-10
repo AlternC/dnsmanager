@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC-dnsmanager 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-08 11:24+0100\n"
-"PO-Revision-Date: 2012-12-09 16:09+0100\n"
+"POT-Creation-Date: 2012-12-10 19:03+0100\n"
+"PO-Revision-Date: 2012-12-10 19:03+0100\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
 "Language: fr\n"
@@ -240,7 +240,7 @@ msgid "Edit"
 msgstr "Modifier"
 
 #: modules/dns/controller.php:70 modules/users/views/show.php:7
-#: modules/users/controller.php:39
+#: modules/users/controller.php:39 modules/dns/views/delete.php:3
 msgid "Delete"
 msgstr "Effacer"
 
@@ -306,10 +306,12 @@ msgid "Server deleted, all zone removed"
 msgstr "Serveur supprimé, ainsi que ses zones"
 
 #: modules/dns/controller.php:139 modules/dns/controller.php:355
+#: modules/dns/views/show.php:81
 msgid "Event"
 msgstr "Événement"
 
 #: modules/dns/controller.php:140 modules/dns/controller.php:356
+#: modules/dns/views/show.php:64 modules/dns/views/show.php:81
 msgid "Zone"
 msgstr "Zone"
 
@@ -867,3 +869,24 @@ msgstr ""
 "<i>alternc.net</i> vers l'IPv4 de votre serveur. Grâce à ce la, votre "
 "serveur aura un nom sur Internet avant même que vous ayez installé un "
 "domaine dessus."
+
+#: modules/users/hooks.php:53
+#, php-format
+msgid "You are %s and you are connected as %s."
+msgstr "Vous êtes %s et vous êtes connecté sur le compte de %s."
+
+#: modules/users/hooks.php:56
+msgid "Go back to my admin account identity."
+msgstr "Revenir à mon compte administrateur."
+
+#: modules/users/views/delete.php:11
+msgid "This will delete all its associated servers and zones"
+msgstr "Cela effacera tous les serveurs et zones associées"
+
+#: modules/dns/views/show.php:64
+msgid "Date"
+msgstr "Date"
+
+#: modules/dns/views/show.php:81
+msgid "Date/Hour"
+msgstr "Date / Heure"

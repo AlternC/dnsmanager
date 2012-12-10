@@ -136,9 +136,9 @@ class DnsController extends AController {
     }
 
     $diffheaders = array(
-		     'action' => _('Event'),
-		     'zone' => _('Zone'),
-		     'datec' => _('Date of the event'),
+		     "action" => _("Event"),
+		     "zone" => _("Zone"),
+		     "datec" => _("Date of the event"),
 		     );
 
 
@@ -351,10 +351,10 @@ class DnsController extends AController {
     }
     
     $headers = array(
-		     'hostname' => _('Server Hostname'),
-		     'action' => _('Event'),
-		     'zone' => _('Zone'),
-		     'datec' => _('Date of the event'),
+		     "hostname" => _("Server Hostname"),
+		     "action" => _("Event"),
+		     "zone" => _("Zone"),
+		     "datec" => _("Date of the event"),
 		     );
     if ($allusers) $headers['user'] = _('User');
     $this->render('diff', array('diff' => $diff, 'headers' => $headers));
