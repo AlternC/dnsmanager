@@ -5,7 +5,7 @@ $infos = array($user);
 
 <?php require_once VIEWS . '/header.php'; ?>
 
-<h2><?php __("Home page"); ?></h2>
+<h2><?php __("Welcome"); ?></h2>
 <p><?php echo $msg; ?></p>
 
 <?php if(count($errors) > 0): ?>
