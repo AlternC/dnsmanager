@@ -1,6 +1,5 @@
 #!/usr/bin/env php
 <?php
-
    /** ************************************************************
     * Download the domlist.php pages of all configured AlternC's 
     * instance, and put them in the database of synchronized domains
@@ -47,6 +46,7 @@ function rolling_curl($urls, $callback, $custom_options = null) {
 		       CURLOPT_CONNECTTIMEOUT => 5,
 		       CURLOPT_MAXREDIRS => 5);
                        // Default timeout is 10 seconds
+  if ($GLOBALS["DEBUG"]) $std_options[CURLOPT_VERBOSE]=true;
   $options = ($custom_options) ? ($std_options + $custom_options) : $std_options;
 
   // start the first batch of requests
@@ -59,8 +59,10 @@ function rolling_curl($urls, $callback, $custom_options = null) {
     if (strtolower(substr($options[CURLOPT_URL],0,5))=="https") { // https :) 
       if (isset($urls[$i]["cafile"]) && $urls[$i]["cafile"] && is_file($urls[$i]["cafile"])) {
 	curl_setopt($ch,CURLOPT_CAINFO,$urls[$i]["cafile"]);
+	if ($GLOBALS["DEBUG"]) echo "cainfo set to ".$urls[$i]["cafile"]."\n";
       } else {
 	curl_setopt($ch,CURLOPT_CAINFO,DEFAULT_CAFILE);
+	if ($GLOBALS["DEBUG"]) echo "cainfo set to DEFAULT\n";
       }
     }
     curl_multi_add_handle($master, $ch);
@@ -73,6 +75,8 @@ function rolling_curl($urls, $callback, $custom_options = null) {
     // a request was just completed -- find out which one
     while($done = curl_multi_info_read($master)) {
       $info = curl_getinfo($done['handle']);
+      // TODO : since ssl_verify_result is buggy, if we have [header_size] => 0  && [request_size] => 0 && [http_code] => 0, AND https, we can pretend the SSL certificate is buggy.
+      if ($GLOBALS["DEBUG"]) { echo "Info for ".$done['handle']." \n"; print_r($info); } 
       if ($info['http_code'] == 200)  {
 	$output = curl_multi_getcontent($done['handle']);
       } else {
