@@ -296,7 +296,7 @@ class DnsController extends AController {
     if ($offset<0) $offset=0; 
     $count=100; //intval($_REQUEST["count"]);
     if ($allusers) {
-      $st = $db->q("SELECT difflog.*, servers.hostname, servers.user, users.login FROM difflog, servers, users WHERE servers.id=difflog.server AND servers.user=users.uid ORDER BY difflog.datec DESC LIMIT ".$offset.",".$count.";");
+      $st = $db->q("SELECT difflog.*, servers.hostname, servers.user, users.login FROM difflog LEFT JOIN servers ON servers.id=difflog.server LEFT JOIN users ON servers.user=users.uid ORDER BY difflog.datec DESC LIMIT ".$offset.",".$count.";");
     } else {
       $st = $db->q("SELECT difflog.*, servers.hostname FROM difflog, servers WHERE servers.id=difflog.server AND servers.user=".$uid." ORDER BY difflog.datec DESC LIMIT ".$offset.",".$count.";");
     }
@@ -307,15 +307,27 @@ class DnsController extends AController {
 		   2 => _("Zone added but disabled (conflict)"),
 		   3 => _("Zone deleted"),
 		   4 => _("Zone enabled (no conflict)"),
+		   6 => _("Hourly scan"),
 		   );
     while ($data = $st->fetch()) {
-      $tmp = array(
-		   '_' => $data,
-		   'hostname' => l($data->hostname, 'dns/show/' . $data->server),
-		   'action' => $aaction[$data->action],
-		   'zone' => $data->zone,
-		   'datec' => $data->datec,
-		   );
+      if ($data->action==6) {
+	$t=unserialize($data->zone);
+	$tmp = array(
+                     '_' => $data,
+                     'hostname' => '',
+		     'action' => $aaction[$data->action],
+		     'zone' => "OK:".$t["serverok"]."  added:".$t["added"]." removed:".$t["deleted"]." failure:".$t["serverfailure"],
+		     'datec' => $data->datec,
+		     );
+      } else {
+	$tmp = array(
+		     '_' => $data,
+		     'hostname' => l($data->hostname, 'dns/show/' . $data->server),
+		     'action' => $aaction[$data->action],
+		     'zone' => $data->zone,
+		     'datec' => $data->datec,
+		     );
+      }
       if ($allusers) $tmp['user'] = $data->login;
       $diff[]= $tmp;
     }
