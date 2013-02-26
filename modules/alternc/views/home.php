@@ -4,7 +4,7 @@
 <table>
 <tr><th>Name</th><th>IPv4</th><th>IPv6</th></tr>
 <tr><td style="padding-right: 15px; font-family: Courier-New, fixed;">ns1.alternc.net</td><td>91.194.60.82</td><td>2001:67c:288::82</td></tr>
-<tr><td style="padding-right: 15px; font-family: Courier-New, fixed;">ns2.alternc.net</td><td>96.126.102.48</td><td></td></tr>
+   <tr><td style="padding-right: 15px; font-family: Courier-New, fixed;">ns2.alternc.net</td><td>96.126.102.48</td><td>2600:3c01:e000:1c::1</td></tr>
    <tr><td style="padding-right: 15px; font-family: Courier-New, fixed;">ns3.alternc.net</td><td>193.56.58.27</td><td>2001:67c:288::1000:27</td></tr>
 </table>
 </div>
