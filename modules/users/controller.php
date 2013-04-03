@@ -1,6 +1,7 @@
 <?php
 
 //require_once MODULES . '/servers/lib.php';
+require_once MODULES . '/users/lib.php';
 
 class UsersController extends AController {
 
@@ -134,7 +135,7 @@ class UsersController extends AController {
 	  $db->q('INSERT INTO `users` (login, pass, email, enabled, admin, validated) VALUES (?, ?, ?, ?, ?, ?)',
 		 array(
 		       $_POST['login'],
-		       crypt($_POST['pass'],$this->getSalt()),
+		       crypt($_POST['pass'],Users::getSalt()),
 		       $_POST['email'],
 		       1, 0, 0, ) );
 	  $uid = $db->lastInsertId();
@@ -272,7 +273,11 @@ AlternC's technical team.
 	  return;
 	}
 	// TODO : force a hard password ;) 
-	$db->q("UPDATE users SET pass=ENCRYPT(?,?) WHERE uid=?;",array($pass,$salt,$id) );
+	
+	$db->q("UPDATE users SET pass=? WHERE uid=?;",array(
+							    crypt($_POST['pass'],Users::getSalt()),
+							    $id
+							    ) );
 	$errors[]=_("Your password has been successfully changed. You may login now");
 	$this->render("empty",array("errors" => $errors));
 	return;
@@ -367,7 +372,7 @@ AlternC's technical team.
         $db->q('INSERT INTO `users` (login, pass, email, enabled, admin, validated) VALUES(?, ?, ?, ?, ?, ?)',
                array(
                      $_POST['login'],
-                     crypt($_POST['pass'],$this->getSalt()),
+                     crypt($_POST['pass'],Users::getSalt()),
                      $_POST['email'],
                      ($_POST['enabled'] == 'on') ? 1 : 0,
                      ($_POST['admin'] == 'on') ? 1 : 0,
@@ -457,7 +462,7 @@ AlternC's technical team.
 	    $this->mail_notify_new_account($user->email, $user->login, $_POST['pass']);
 	  }
 
-	  $db->q('UPDATE users SET pass = ? WHERE uid = ?', array(crypt($_POST['pass'],$this->getSalt()), $user->uid));
+	  $db->q('UPDATE users SET pass = ? WHERE uid = ?', array(crypt($_POST['pass'],Users::getSalt()), $user->uid));
 
 	  $args = array('uid' => $user->uid, 'login' => $user->login, 'pass' => $_POST['pass']);
 	  Hooks::call('users_edit_pass', $args);
@@ -582,7 +587,7 @@ AlternC's technical team.
 	  Hooks::call('users_edit', $args);
 
 	  if (!empty($_POST['pass'])) {
-	    $db->q('UPDATE users SET pass = ? WHERE uid = ?', array(crypt($_POST['pass'],$this->getSalt()), $user->uid));
+	    $db->q('UPDATE users SET pass = ? WHERE uid = ?', array(crypt($_POST['pass'],Users::getSalt()), $user->uid));
 	    $args = array('uid' => $user->uid, 'login' => $user->login, 'pass' => $_POST['pass']);
 	    Hooks::call('users_edit_pass', $args);
 	  }
@@ -682,15 +687,6 @@ L'équipe technique
     'X-Mailer: PHP/' . phpversion();
 
   mail($to, $subject, $message, $headers);
-}
-
-
-/** Returns a hash for the crypt password hashing function.
- * as of now, we use php5.3 almost best hashing function: SHA-256 with 1000 rounds and a random 16 chars salt.
- */
-private function getSalt() {
-  $salt = substr(str_replace('+', '.', base64_encode(pack('N4', mt_rand(), mt_rand(), mt_rand(), mt_rand()))), 0, 16);
-  return '$5$rounds=1000$'.$salt.'$';
 }
 
 

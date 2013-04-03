@@ -65,7 +65,7 @@ class Users {
     $db->q('INSERT INTO `users` (uid, login, pass, email, enabled, admin) VALUES(NULL, ?, ?, ?, ?, ?)',
 	   array(
 		 $login,
-		 crypt($pass),
+		 crypt($pass,$this->getSalt()),
 		 $email,
 		 ($enabled) ? 1 : 0,
 		 ($admin) ? 1 : 0,
@@ -74,4 +74,11 @@ class Users {
 
     return $db->lastInsertId();
   }
-}
+
+  public static function getSalt() {
+    $salt = substr(str_replace('+', '.', base64_encode(pack('N4', mt_rand(), mt_rand(), mt_rand(), mt_rand()))), 0, 16);
+    return '$5$rounds=1000$'.$salt.'$';
+  }
+
+
+} // class Users
