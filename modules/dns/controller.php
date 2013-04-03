@@ -40,10 +40,15 @@ class DnsController extends AController {
       $st = $db->q('SELECT * FROM servers WHERE user=? ORDER BY hostname',array($uid));
     }
     $servers = array();
+    if (HOSTNAME_DOMAIN) {
+      $sub=".".HOSTNAME_DOMAIN;
+    } else {
+      $sub="";
+    }
     while ($data = $st->fetch()) {
       $tmp = array(
 		   '_' => $data,
-		   'name' => l($data->hostname, 'dns/show/' . $data->id),
+		   'name' => l($data->hostname.$sub, 'dns/show/' . $data->id),
 		   'url' => $data->fqdn,
 		   'ip' => $data->ip,
 		   'enabled' => ($data->enabled)?_("Yes"):_("No"),
@@ -54,7 +59,9 @@ class DnsController extends AController {
       $servers[]=$tmp;
     }
     if (count($servers)==0) {
-      
+      // Redirect to /dns/add
+      header("Location: /dns/add");
+      exit();
     }
     Hooks::call('dns_list_servers', $servers);
     foreach ($servers as $k => $server) {
@@ -88,7 +95,7 @@ class DnsController extends AController {
   public function showAction($params) {
     check_user_identity();
     global $db;
-
+    $errors=array(); $notice=array();
     $id = intval($params[0]);
     $uid=$GLOBALS['me']['uid'];
     $st = $db->q('SELECT * FROM servers WHERE user=? AND id=?',array($uid,$id));
@@ -98,6 +105,10 @@ class DnsController extends AController {
       $errors[]=_("Server not found");
       $this->render('list', array('errors'=>$errors));      
       return;
+    }
+
+    if (HOSTNAME_DOMAIN) {
+      $server->hostname.=".".HOSTNAME_DOMAIN;
     }
 
     // List the zones for this server
@@ -112,6 +123,8 @@ class DnsController extends AController {
 		   3 => _("Zone deleted"),
 		   4 => _("Zone enabled (no conflict)"),
 		   5 => _("Empty file received from server"),
+		   6 => _("Statistics of the DNS Manager"),
+		   7 => _("Server deleted, all zone removed"),
 		   );
     while ($data = $st->fetch()) {
       $diff[] = array(
@@ -123,9 +136,9 @@ class DnsController extends AController {
     }
 
     $diffheaders = array(
-		     'action' => _('Event'),
-		     'zone' => _('Zone'),
-		     'datec' => _('Date of the event'),
+		     "action" => _("Event"),
+		     "zone" => _("Zone"),
+		     "datec" => _("Date of the event"),
 		     );
 
 
@@ -133,10 +146,11 @@ class DnsController extends AController {
   }
     
 
-  public function addAction() {
+  public function addAction() { 
+    global $db;
+
     check_user_identity();
-    
-    $errors = array(); // OK if no problem
+    $errors=array(); $notice=array();
     $uid=$GLOBALS['me']['uid'];
 
     if (!empty($_POST)) {
@@ -151,6 +165,7 @@ class DnsController extends AController {
 	if (!$id) {
 	  $errors[]=_("An error occurred, please try again later");	  
 	} else {
+	  touch(MARKUP_FILE);
 	  $args = array(
 			'id' => $id,
 			'hostname' => $_POST['hostname'],
@@ -178,8 +193,11 @@ class DnsController extends AController {
      * on pré-rempli le formulaire avec les données de la saisie.
      */
     $form_data = (empty($_POST)) ? array() : $_POST; 
-
-    $this->render('form', array('op' => 'add', 'data' => $form_data, 'errors' => $errors));
+    $many = $db->qone('SELECT count(*) FROM servers WHERE servers.user=?',array($uid));
+    if ($many==0) {
+      $notice[]=_("You have no server at the moment. Please add one");
+    }
+    $this->render('form', array('op' => 'add', 'data' => $form_data, 'errors' => $errors, 'notice' => $notice));
   }
 
 
@@ -198,8 +216,7 @@ class DnsController extends AController {
 
     if ($server == false)
       not_found();
-
-    $errors = array(); 
+    $errors=array(); $notice=array();
 
     if (!empty($_POST)) {
       $errors = self::verifyForm($_POST, 'edit');
@@ -215,7 +232,13 @@ class DnsController extends AController {
 		     $server->id,
                      )
                );
-
+	if ($server["hostname"]!=$_POST["hostname"]) {
+	  touch(MARKUP_FILE);
+	}
+	if ($server["ip"]!=$_POST["ip"] && $server["lastcount"]>0 && $server["enabled"]) {
+	  // The server's IP changed, reload his zone list!
+	  touch(FORCE_NEXT);
+	}
         // Message + redirection
 	header('Location: ' . BASE_URL . 'dns/show/' . $server->id . '?msg=' . _("Server successfully updated"));
 	exit;
@@ -240,7 +263,7 @@ class DnsController extends AController {
       $form_data = $_POST;
     }
 
-    $this->render('form', array('op' => 'edit', 'hostname' => $server->hostname, 'data' => $form_data, 'errors' => $errors));
+    $this->render('form', array('op' => 'edit', 'hostname' => $server->hostname, 'data' => $form_data, 'errors' => $errors, 'notice' => $notice));
   }
 
 
@@ -259,7 +282,11 @@ class DnsController extends AController {
 
     if (!empty($_POST['op'])) {
 	$db->q('DELETE FROM servers WHERE id=?', array($id));
-	// TODO : delete the zones and force reload of BIND ! > launch sync in force mode !
+	$db->q('DELETE FROM zone WHERE server=?',array($id));
+	$db->q('INSERT INTO difflog SET server=?, action=?, datec=NOW()',array($id,DIFF_ACTION_DELETE_SERVER));
+	
+	touch(MARKUP_FILE);
+	touch(FORCE_NEXT);
 	$args = array($server);
 	Hooks::call('server_delete', $args);
         // Message + redirection
@@ -336,10 +363,10 @@ class DnsController extends AController {
     }
     
     $headers = array(
-		     'hostname' => _('Server Hostname'),
-		     'action' => _('Event'),
-		     'zone' => _('Zone'),
-		     'datec' => _('Date of the event'),
+		     "hostname" => _("Server Hostname"),
+		     "action" => _("Event"),
+		     "zone" => _("Zone"),
+		     "datec" => _("Date of the event"),
 		     );
     if ($allusers) $headers['user'] = _('User');
     $this->render('diff', array('diff' => $diff, 'headers' => $headers));
@@ -352,6 +379,7 @@ class DnsController extends AController {
 
   /* Check a form for the user editor */
   private static function verifyForm($data, $op) {
+    $errors=array(); $notice=array();
     $errors = array();
     if (empty($data['hostname']))
 	$errors[] = _("Please set the hostname of the server. This should be unique between all AlternC DNS Manager accounts");

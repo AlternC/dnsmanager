@@ -90,7 +90,7 @@ class UsersController extends AController {
 
   /* Check a form for the user editor */
   private static function verifyForm($data, $op) {
-    $errors = array();
+    $errors=array(); $notice=array();
     if ($op != 'meedit') {
       if (empty($data['login']))
 	$errors[] = _("Please set the login name");
@@ -118,9 +118,8 @@ class UsersController extends AController {
    * Add a user (if ! ALLOW_CREATE_ACCOUNT===true, for admins only)
    */
   public function createAction() {
+    $errors=array(); $notice=array();
 
-    $errors = array(); // OK if no problem
-    
     if (ALLOW_CREATE_ACCOUNT!==true && !is_admin()) 
       not_found();
 
@@ -207,7 +206,7 @@ AlternC's technical team.
      * Email Validation 
      */
     public function validateAction() {
-      $errors = array(); // OK if no problem
+      $errors=array(); $notice=array();
       global $db;
       $me=$db->qone('SELECT * FROM `users` WHERE uid=?;', array(intval($_GET['id'])) );
       if (!$me) {
@@ -221,8 +220,8 @@ AlternC's technical team.
 	exit();	
       }
       $db->qone("UPDATE users SET validated=1 WHERE uid=?",array(intval($_GET['id'])));
-      $errors[]=_("Your account has been validated, please login to use our services");
-      $this->render("validate",array("errors" => $errors));
+      $notice[]=_("Your account has been validated, please login to declare your servers");
+      $this->render("validate",array("errors" => $errors, "notice" => $notice));
     }
 
 
@@ -392,7 +391,7 @@ AlternC's technical team.
 	Hooks::call('users_add', $args);
 
         // Message + redirection
-	header('Location: ' . BASE_URL . 'users/show/' . $uid . '?msg=' . _("Ajout OK..."));
+	header('Location: ' . BASE_URL . 'users/show/' . $uid );
 	exit;
       }
     }
@@ -469,7 +468,7 @@ AlternC's technical team.
 	}
 
         // Message + redirection
-	header('Location: ' . BASE_URL . 'users/show/' . $user->uid . '?msg=' . _("Mise à jour OK..."));
+	header('Location: ' . BASE_URL . 'users/show/' . $user->uid );
 	exit;
       }
     }

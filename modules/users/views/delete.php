@@ -4,9 +4,11 @@ $breadcrumb = array('users' => 'Utilisateurs', 'users/show/' . $user->uid => $us
 
 require VIEWS . '/header.php';
 ?>
+<?php $this->render("flash",array("errors"=>$errors, "notice"=>$notice)); ?>
+
 <form action="" method="post">
   <p><?php echo sprintf(_("Do you really want to delete user '%s'?"), $user->login); ?></p>
-  <p><?php __("This will delete all its associated media"); ?></p>
+  <p><?php __("This will delete all its associated servers and zones"); ?></p>
   <?php
      $informations = array($user);
      Hooks::call('users_delete_infos', $informations);

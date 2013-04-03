@@ -8,7 +8,6 @@
 
 require_once(__DIR__."/sync.conf.php");
 
-
 // FIXME: if -f FORCE the reload of all zones
 if (isset($argv) && count($argv)>1) {
   // we may ask for only some FQDN. TODO.

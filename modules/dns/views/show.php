@@ -61,7 +61,7 @@ table.list col:first-child {background: #FF0}
 
 <div style="float: left; padding-right: 50px">
 <h2><?php __("Zone hosted in that server"); ?></h2>
-<table class="list"><tr><th>Zone</th><th>Date</th></tr>
+<table class="list"><tr><th><?php __("Zone"); ?></th><th><?php __("Date"); ?></th></tr>
   <?php
 foreach($zones as $z) {
   if ($z->enabled) {
@@ -78,7 +78,7 @@ foreach($zones as $z) {
 
 <div style="float: left">
 <h2><?php __("Last log for this server"); ?></h2>
-<table class="list"><tr><th>Event</th><th>Zone</th><th>Date/Hour</th></tr>
+<table class="list"><tr><th><?php __("Event"); ?></th><th><?php __("Zone"); ?></th><th><?php __("Date/Hour"); ?></th></tr>
   <?php
 foreach($diff as $z) {
      echo "<tr><td>".$z['action']."</td>";

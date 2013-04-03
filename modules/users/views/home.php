@@ -11,8 +11,8 @@ if (ALLOW_CREATE_ACCOUNT===true) {
 
   <h2><?php __("Existing Users"); ?></h2>
   <fieldset style="width: 80%">
-    <p>-  <a href="/users/me">Login into my account</a>  </p>
-    <p>-  <a href="/users/forgot">I forgot my password</a>  </p>
+   <p>-  <a href="/users/me"><?php __("Log into my account"); ?></a>  </p>
+   <p>-  <a href="/users/forgot"><?php __("I forgot my password"); ?></a>  </p>
   </fieldset>
 
 </div>

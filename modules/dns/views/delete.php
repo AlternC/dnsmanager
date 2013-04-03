@@ -1,6 +1,6 @@
 <?php
 $title = $server->hostname;
-$breadcrumb = array('servers' => 'Utilisateurs', 'servers/show/' . $server->id => $server->hostname, '' => _("Supprimer"));
+$breadcrumb = array('servers' => 'Utilisateurs', 'servers/show/' . $server->id => $server->hostname, '' => _("Delete"));
 
 require VIEWS . '/header.php';
 ?>
