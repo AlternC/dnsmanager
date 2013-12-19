@@ -5,7 +5,6 @@
     * instance, and put them in the database of synchronized domains
     * remember the diff with previous retrieval.
     */
-
 require_once(__DIR__."/sync.conf.php");
 
 // FIXME: if -f FORCE the reload of all zones
