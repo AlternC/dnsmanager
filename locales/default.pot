@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 11:06+0100\n"
+"POT-Creation-Date: 2013-12-19 11:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,6 +127,7 @@ msgid "URL:"
 msgstr ""
 
 #: modules/dns/views/form.php:43 modules/dns/views/form.php:44
+#: modules/dns/views/form.php:44
 msgid "CA Certificate:"
 msgstr ""
 
@@ -149,17 +150,20 @@ msgid ""
 msgstr ""
 
 #: modules/dns/views/form.php:49 modules/dns/views/form.php:50
+#: modules/dns/views/form.php:50
 msgid "Add this server"
 msgstr ""
 
 #: modules/dns/views/form.php:50 modules/dns/views/show.php:7
-#: modules/dns/views/form.php:51 modules/dns/views/show.php:7
+#: modules/dns/views/form.php:51 modules/dns/views/form.php:51
+#: modules/dns/views/show.php:7
 msgid "Edit this server"
 msgstr ""
 
 #: modules/dns/views/form.php:51 modules/users/views/form.php:48
 #: modules/users/views/home.php:34 modules/dns/views/form.php:52
-#: modules/users/views/form.php:48 modules/users/views/home.php:34
+#: modules/dns/views/form.php:52 modules/users/views/form.php:48
+#: modules/users/views/home.php:34
 msgid "Cancel"
 msgstr ""
 
@@ -192,7 +196,7 @@ msgid "Server informations"
 msgstr ""
 
 #: modules/dns/views/show.php:37 modules/dns/controller.php:75
-#: modules/dns/views/show.php:37 modules/dns/controller.php:75
+#: modules/dns/views/show.php:37 modules/dns/controller.php:76
 msgid "Hostname"
 msgstr ""
 
@@ -206,16 +210,18 @@ msgstr ""
 
 #: modules/dns/views/show.php:44 modules/dns/controller.php:54
 #: modules/dns/views/show.php:44 modules/dns/controller.php:54
+#: modules/dns/controller.php:55
 msgid "Yes"
 msgstr ""
 
 #: modules/dns/views/show.php:44 modules/dns/controller.php:54
 #: modules/dns/views/show.php:44 modules/dns/controller.php:54
+#: modules/dns/controller.php:55
 msgid "No"
 msgstr ""
 
 #: modules/dns/views/show.php:46 modules/dns/controller.php:76
-#: modules/dns/views/show.php:46 modules/dns/controller.php:76
+#: modules/dns/views/show.php:46 modules/dns/controller.php:77
 msgid "URL"
 msgstr ""
 
@@ -237,139 +243,159 @@ msgstr ""
 
 #: modules/dns/controller.php:69 modules/users/views/me.php:5
 #: modules/users/views/form.php:8 modules/users/views/show.php:6
-#: modules/users/controller.php:38 modules/dns/controller.php:69
-#: modules/users/views/form.php:8 modules/users/views/me.php:5
-#: modules/users/views/show.php:6 modules/users/controller.php:39
+#: modules/users/controller.php:38 modules/users/controller.php:39
+#: modules/dns/controller.php:70 modules/users/views/form.php:8
+#: modules/users/views/me.php:5 modules/users/views/show.php:6
+#: modules/users/controller.php:39
 msgid "Edit"
 msgstr ""
 
 #: modules/dns/controller.php:70 modules/users/views/show.php:7
 #: modules/users/controller.php:39 modules/dns/views/delete.php:3
-#: modules/dns/views/delete.php:3 modules/dns/controller.php:70
-#: modules/users/views/show.php:7 modules/users/controller.php:40
+#: modules/users/controller.php:40 modules/dns/views/delete.php:3
+#: modules/dns/controller.php:71 modules/users/views/show.php:7
+#: modules/users/controller.php:40
 msgid "Delete"
 msgstr ""
 
-#: modules/dns/controller.php:77 modules/dns/controller.php:77
+#: modules/dns/controller.php:77 modules/dns/controller.php:78
 msgid "IP Address"
 msgstr ""
 
 #: modules/dns/controller.php:78 modules/users/controller.php:46
-#: modules/dns/controller.php:78 modules/users/controller.php:47
+#: modules/users/controller.php:47 modules/dns/controller.php:79
+#: modules/users/controller.php:47
 msgid "Enabled"
 msgstr ""
 
-#: modules/dns/controller.php:79 modules/dns/controller.php:79
+#: modules/dns/controller.php:79 modules/dns/controller.php:81
 msgid "Domain Count"
 msgstr ""
 
-#: modules/dns/controller.php:80 modules/dns/controller.php:80
+#: modules/dns/controller.php:80 modules/dns/controller.php:82
 msgid "Updated on"
 msgstr ""
 
 #: modules/dns/controller.php:82 modules/dns/controller.php:359
-#: modules/dns/controller.php:82 modules/dns/controller.php:373
+#: modules/dns/controller.php:373 modules/dns/controller.php:84
+#: modules/dns/controller.php:375
 msgid "User"
 msgstr ""
 
 #: modules/dns/controller.php:85 modules/users/views/me.php:5
 #: modules/users/views/show.php:5 modules/users/controller.php:50
-#: modules/dns/controller.php:85 modules/users/views/me.php:5
-#: modules/users/views/show.php:5 modules/users/controller.php:51
+#: modules/users/controller.php:51 modules/dns/controller.php:87
+#: modules/users/views/me.php:5 modules/users/views/show.php:5
+#: modules/users/controller.php:51
 msgid "Actions"
 msgstr ""
 
-#: modules/dns/controller.php:105 modules/dns/controller.php:105
+#: modules/dns/controller.php:105 modules/dns/controller.php:107
 msgid "Server not found"
 msgstr ""
 
 #: modules/dns/controller.php:120 modules/dns/controller.php:332
-#: modules/dns/controller.php:120 modules/dns/controller.php:334
+#: modules/dns/controller.php:334 modules/dns/controller.php:122
+#: modules/dns/controller.php:336
 msgid "Timeout connecting to the server"
 msgstr ""
 
 #: modules/dns/controller.php:121 modules/dns/controller.php:333
-#: modules/dns/controller.php:121 modules/dns/controller.php:335
+#: modules/dns/controller.php:335 modules/dns/controller.php:123
+#: modules/dns/controller.php:337
 msgid "Zone added"
 msgstr ""
 
 #: modules/dns/controller.php:122 modules/dns/controller.php:334
-#: modules/dns/controller.php:122 modules/dns/controller.php:336
+#: modules/dns/controller.php:336 modules/dns/controller.php:124
+#: modules/dns/controller.php:338
 msgid "Zone added but disabled (conflict)"
 msgstr ""
 
 #: modules/dns/controller.php:123 modules/dns/controller.php:335
-#: modules/dns/controller.php:123 modules/dns/controller.php:337
+#: modules/dns/controller.php:337 modules/dns/controller.php:125
+#: modules/dns/controller.php:339
 msgid "Zone deleted"
 msgstr ""
 
 #: modules/dns/controller.php:124 modules/dns/controller.php:336
-#: modules/dns/controller.php:124 modules/dns/controller.php:338
+#: modules/dns/controller.php:338 modules/dns/controller.php:126
+#: modules/dns/controller.php:340
 msgid "Zone enabled (no conflict)"
 msgstr ""
 
-#: modules/dns/controller.php:125 modules/dns/controller.php:125
+#: modules/dns/controller.php:125 modules/dns/controller.php:127
 msgid "Empty file received from server"
 msgstr ""
 
-#: modules/dns/controller.php:126 modules/dns/controller.php:126
+#: modules/dns/controller.php:126 modules/dns/controller.php:128
 msgid "Statistics of the DNS Manager"
 msgstr ""
 
-#: modules/dns/controller.php:127 modules/dns/controller.php:127
+#: modules/dns/controller.php:127 modules/dns/controller.php:129
 msgid "Server deleted, all zone removed"
 msgstr ""
 
 #: modules/dns/controller.php:139 modules/dns/controller.php:355
-#: modules/dns/views/show.php:81 modules/dns/views/show.php:81
-#: modules/dns/controller.php:139 modules/dns/controller.php:369
+#: modules/dns/views/show.php:81 modules/dns/controller.php:369
+#: modules/dns/views/show.php:81 modules/dns/controller.php:141
+#: modules/dns/controller.php:371
 msgid "Event"
 msgstr ""
 
 #: modules/dns/controller.php:140 modules/dns/controller.php:356
 #: modules/dns/views/show.php:64 modules/dns/views/show.php:81
-#: modules/dns/views/show.php:64 modules/dns/views/show.php:81
-#: modules/dns/controller.php:140 modules/dns/controller.php:370
+#: modules/dns/controller.php:370 modules/dns/views/show.php:64
+#: modules/dns/views/show.php:81 modules/dns/controller.php:142
+#: modules/dns/controller.php:372
 msgid "Zone"
 msgstr ""
 
 #: modules/dns/controller.php:141 modules/dns/controller.php:357
-#: modules/dns/controller.php:141 modules/dns/controller.php:371
+#: modules/dns/controller.php:371 modules/dns/controller.php:143
+#: modules/dns/controller.php:373
 msgid "Date of the event"
 msgstr ""
 
-#: modules/dns/controller.php:166 modules/dns/controller.php:166
+#: modules/dns/controller.php:166 modules/dns/controller.php:168
 msgid "An error occurred, please try again later"
 msgstr ""
 
 #: modules/dns/controller.php:179 modules/dns/controller.php:180
+#: modules/dns/controller.php:182
 msgid "Server Added..."
 msgstr ""
 
 #: modules/dns/controller.php:198 modules/dns/controller.php:199
+#: modules/dns/controller.php:201
 msgid "You have no server at the moment. Please add one"
 msgstr ""
 
 #: modules/dns/controller.php:243 modules/dns/controller.php:245
+#: modules/dns/controller.php:247
 msgid "Server successfully updated"
 msgstr ""
 
 #: modules/dns/controller.php:293 modules/dns/controller.php:295
+#: modules/dns/controller.php:297
 #, php-format
 msgid "Server %s successfully deleted"
 msgstr ""
 
 #: modules/dns/controller.php:354 modules/dns/controller.php:368
+#: modules/dns/controller.php:370
 msgid "Server Hostname"
 msgstr ""
 
 #: modules/dns/controller.php:373 modules/dns/controller.php:387
+#: modules/dns/controller.php:389
 msgid ""
 "Please set the hostname of the server. This should be unique between all "
 "AlternC DNS Manager accounts"
 msgstr ""
 
 #: modules/dns/controller.php:375 modules/dns/controller.php:389
+#: modules/dns/controller.php:391
 msgid "Please set the public IPv4 address of the server."
 msgstr ""
 
@@ -603,55 +629,68 @@ msgid "Erreur lors de la connexion à la base de données."
 msgstr ""
 
 #: modules/users/controller.php:40 modules/users/controller.php:41
+#: modules/users/controller.php:41
 msgid "Connect as"
 msgstr ""
 
 #: modules/users/controller.php:44 modules/users/controller.php:45
+#: modules/users/controller.php:45
 msgid "Name"
 msgstr ""
 
 #: modules/users/controller.php:45 modules/users/controller.php:46
+#: modules/users/controller.php:46
 msgid "Email"
 msgstr ""
 
 #: modules/users/controller.php:47 modules/users/controller.php:48
+#: modules/users/controller.php:48
 msgid "Admin."
 msgstr ""
 
 #: modules/users/controller.php:73 modules/users/controller.php:81
+#: modules/users/controller.php:74 modules/users/controller.php:82
 #: modules/users/controller.php:74 modules/users/controller.php:82
 msgid "yes"
 msgstr ""
 
 #: modules/users/controller.php:73 modules/users/controller.php:81
 #: modules/users/controller.php:74 modules/users/controller.php:82
+#: modules/users/controller.php:74 modules/users/controller.php:82
 msgid "no"
 msgstr ""
 
 #: modules/users/controller.php:95 modules/users/controller.php:96
+#: modules/users/controller.php:96
 msgid "Please set the login name"
 msgstr ""
 
 #: modules/users/controller.php:101 modules/users/controller.php:102
+#: modules/users/controller.php:102
 msgid "Please set a password"
 msgstr ""
 
 #: modules/users/controller.php:103 modules/users/controller.php:108
 #: modules/users/controller.php:104 modules/users/controller.php:109
+#: modules/users/controller.php:104 modules/users/controller.php:109
 msgid "The passwords are different, please check"
 msgstr ""
 
 #: modules/users/controller.php:112 modules/users/controller.php:113
+#: modules/users/controller.php:113
 msgid "The email address is mandatory"
 msgstr ""
 
 #: modules/users/controller.php:153 modules/users/controller.php:309
 #: modules/users/controller.php:659 modules/users/controller.php:154
 #: modules/users/controller.php:314 modules/users/controller.php:664
+#: modules/users/controller.php:154 modules/users/controller.php:314
+#: modules/users/controller.php:664
 msgid "Your account on AlternC DNS Manager"
 msgstr ""
 
 #: modules/users/controller.php:154 modules/users/controller.php:155
+#: modules/users/controller.php:155
 #, php-format
 msgid ""
 "\n"
@@ -672,18 +711,22 @@ msgid ""
 msgstr ""
 
 #: modules/users/controller.php:212 modules/users/controller.php:213
+#: modules/users/controller.php:213
 msgid "Your account has not been found, please check the link"
 msgstr ""
 
 #: modules/users/controller.php:217 modules/users/controller.php:218
+#: modules/users/controller.php:218
 msgid "The key is missing or not correct, please check"
 msgstr ""
 
 #: modules/users/controller.php:222 modules/users/controller.php:223
+#: modules/users/controller.php:223
 msgid "Your account has been validated, please login to declare your servers"
 msgstr ""
 
 #: modules/users/controller.php:238 modules/users/controller.php:261
+#: modules/users/controller.php:239 modules/users/controller.php:262
 #: modules/users/controller.php:239 modules/users/controller.php:262
 msgid ""
 "The link you clicked is invalid. If it is old, please ask again for a "
@@ -691,26 +734,32 @@ msgid ""
 msgstr ""
 
 #: modules/users/controller.php:245 modules/users/controller.php:246
+#: modules/users/controller.php:246
 msgid "User not found, please check your link"
 msgstr ""
 
 #: modules/users/controller.php:269 modules/users/controller.php:270
+#: modules/users/controller.php:270
 msgid "The password you entered are different, please retry"
 msgstr ""
 
 #: modules/users/controller.php:275 modules/users/controller.php:280
+#: modules/users/controller.php:280
 msgid "Your password has been successfully changed. You may login now"
 msgstr ""
 
 #: modules/users/controller.php:292 modules/users/controller.php:297
+#: modules/users/controller.php:297
 msgid "Please enter an email address"
 msgstr ""
 
 #: modules/users/controller.php:301 modules/users/controller.php:306
+#: modules/users/controller.php:306
 msgid "This email is not linked to an account here, sorry."
 msgstr ""
 
 #: modules/users/controller.php:310 modules/users/controller.php:315
+#: modules/users/controller.php:315
 #, php-format
 msgid ""
 "\n"
@@ -734,6 +783,7 @@ msgid ""
 msgstr ""
 
 #: modules/users/controller.php:337 modules/users/controller.php:342
+#: modules/users/controller.php:342
 msgid ""
 "A link to reset your password has been sent to your email address. Please "
 "click that link (warning, the link is only working one day from now)"
@@ -744,28 +794,33 @@ msgid "Ajout OK..."
 msgstr ""
 
 #: modules/users/controller.php:466 modules/users/controller.php:590
-#: modules/users/controller.php:595
+#: modules/users/controller.php:595 modules/users/controller.php:595
 msgid "Mise à jour OK..."
 msgstr ""
 
 #: modules/users/controller.php:508 modules/users/controller.php:513
+#: modules/users/controller.php:513
 msgid "Yes, Delete"
 msgstr ""
 
 #: modules/users/controller.php:513 modules/users/controller.php:518
+#: modules/users/controller.php:518
 #, php-format
 msgid "User %s successfully deleted"
 msgstr ""
 
 #: modules/users/controller.php:518 modules/users/controller.php:523
+#: modules/users/controller.php:523
 msgid "Nothing has been deleted"
 msgstr ""
 
 #: modules/users/controller.php:632 modules/users/controller.php:637
+#: modules/users/controller.php:637
 msgid "Password change on AlternC DNS Manager"
 msgstr ""
 
 #: modules/users/controller.php:633 modules/users/controller.php:638
+#: modules/users/controller.php:638
 #, php-format
 msgid ""
 "\n"
@@ -786,6 +841,7 @@ msgid ""
 msgstr ""
 
 #: modules/users/controller.php:660 modules/users/controller.php:665
+#: modules/users/controller.php:665
 #, php-format
 msgid ""
 "\n"
@@ -862,17 +918,37 @@ msgstr ""
 msgid "Date/Hour"
 msgstr ""
 
-#: modules/dns/views/form.php:43
+#: modules/dns/views/form.php:43 modules/dns/views/form.php:43
 msgid "Don't check the certificate"
 msgstr ""
 
-#: modules/dns/views/form.php:47
+#: modules/dns/views/form.php:47 modules/dns/views/form.php:47
 msgid ""
 "If you don't have a proper CA-signed certificate, you can paste here your "
 "self-signed certificate, or check the box above to block any certificate "
 "check (not recommended)."
 msgstr ""
 
-#: modules/dns/controller.php:339
+#: modules/dns/controller.php:339 modules/dns/controller.php:341
 msgid "Hourly scan"
+msgstr ""
+
+#: modules/dns/views/form.php:45 modules/dns/views/form.php:45
+msgid ""
+"You must have created a SlaveDNS account in the <b>Admin Control Panel</b> "
+"of AlternC, in the <b>Manage slave DNS</b> menu."
+msgstr ""
+
+#: modules/dns/views/form.php:46 modules/dns/views/form.php:46
+msgid ""
+"The url is usually like <code>https://login:password@panel.yourserver.tld/"
+"domlist.php</code>"
+msgstr ""
+
+#: modules/dns/controller.php:55
+msgid "n/a"
+msgstr ""
+
+#: modules/dns/controller.php:80
+msgid "SSL Check"
 msgstr ""

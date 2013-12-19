@@ -52,6 +52,7 @@ class DnsController extends AController {
 		   'url' => $data->fqdn,
 		   'ip' => $data->ip,
 		   'enabled' => ($data->enabled)?_("Yes"):_("No"),
+		   'nosslcheck' => (substr($data->url,0,8)=="https://")? ( ($data->nosslcheck)?_("No"):_("Yes") ):_("n/a"),
 		   'lastcount' => "<span class=\"".$this->lastcountstatus($data->lastcount)."\">".$data->lastcount."</span>",
 		   'updated' => $data->updated,
 		   );
@@ -76,6 +77,7 @@ class DnsController extends AController {
 		     'url' => _('URL'),
 		     'ip' => _('IP Address'),
 		     'enabled' => _('Enabled'),
+		     'nosslcheck' => _('SSL Check'),
 		     'lastcount' => _('Domain Count'),
 		     'updated' => _('Updated on'),
 		     );
