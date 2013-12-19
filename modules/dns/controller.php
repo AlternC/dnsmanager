@@ -158,8 +158,8 @@ class DnsController extends AController {
       
       if (empty($errors)) {
         global $db;
-        $db->q('INSERT INTO `servers` (user, hostname, url, ip, cacert, enabled, created) VALUES(?, ?, ?, ?, ?, ?, NOW() )',
-               array( $uid, $_POST['hostname'], $_POST['url'], $_POST['ip'], $_POST['cacert'],   ($_POST['enabled'] == 'on') ? 1 : 0  )
+        $db->q('INSERT INTO `servers` (user, hostname, url, ip, cacert, nosslcheck, enabled, created) VALUES(?, ?, ?, ?, ?, ?, NOW() )',
+               array( $uid, $_POST['hostname'], $_POST['url'], $_POST['ip'], $_POST['cacert'],    ($_POST['nosslcheck'] == 'on') ? 1 : 0  ,  ($_POST['enabled'] == 'on') ? 1 : 0  )
 	       );
 	$id = $db->lastInsertId();
 	if (!$id) {
@@ -171,6 +171,7 @@ class DnsController extends AController {
 			'hostname' => $_POST['hostname'],
 			'url' => $_POST['url'],
 			'cacert' => $_POST['cacert'],
+			'nosslcheck' => ($_POST['nosslcheck'] == 'on'),
 			'ip' => $_POST['ip'],
 			'enabled' => ($_POST['enabled'] == 'on'),
 			);
@@ -222,11 +223,12 @@ class DnsController extends AController {
       $errors = self::verifyForm($_POST, 'edit');
 
       if (empty($errors)) {
-        $db->q('UPDATE servers SET url=?, hostname=?, cacert=?, ip=?, enabled=? WHERE id=?',
+        $db->q('UPDATE servers SET url=?, hostname=?, cacert=?, nosslcheck=?, ip=?, enabled=? WHERE id=?',
                array(
                      $_POST['url'],
                      $_POST['hostname'],
                      $_POST['cacert'],
+                     ($_POST['nosslcheck'] == 'on') ? 1 : 0,
                      $_POST['ip'],
                      ($_POST['enabled'] == 'on') ? 1 : 0,
 		     $server->id,

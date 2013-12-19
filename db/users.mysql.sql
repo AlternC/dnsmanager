@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.66, for debian-linux-gnu (i686)
+-- MySQL dump 10.13  Distrib 5.5.33, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: dnsmanager
 -- ------------------------------------------------------
--- Server version	5.1.66-0ubuntu0.11.10.2-log
+-- Server version	5.5.33-0+wheezy1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +29,7 @@ CREATE TABLE `difflog` (
   `zone` varchar(255) NOT NULL,
   `datec` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=410 DEFAULT CHARSET=latin1 COMMENT='Diff on AlternC servers';
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Diff on AlternC servers';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,13 +46,14 @@ CREATE TABLE `servers` (
   `url` varchar(255) NOT NULL,
   `ip` varchar(128) NOT NULL,
   `cacert` text NOT NULL,
+  `nosslcheck` tinyint(4) NOT NULL DEFAULT '0',
   `enabled` tinyint(4) NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   `lastcount` int(11) NOT NULL COMMENT 'Number of domain during last synchro. -1 for error',
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='The AlternC servers of each user';
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='The AlternC servers of each user';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +73,7 @@ CREATE TABLE `users` (
   `validated` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +91,7 @@ CREATE TABLE `zones` (
   `enabled` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `zone` (`zone`)
-) ENGINE=MyISAM AUTO_INCREMENT=380 DEFAULT CHARSET=latin1 COMMENT='The list of zones to synchronize using AXFR from remote serv';
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='The list of zones to synchronize using AXFR from remote serv';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -102,4 +103,4 @@ CREATE TABLE `zones` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-06 21:06:18
+-- Dump completed on 2013-12-19 11:08:46

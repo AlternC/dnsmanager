@@ -40,10 +40,11 @@ require VIEWS . '/header.php';
   <fieldset style="width: 80%;">
     <legend><?php __("AlternC synchronisation"); ?></legend>
 <?php input('url', _("URL:"), 'text', $data['url'],"largeinput"); ?>
+<?php input('nosslcheck', _("Don't check the certificate"), 'checkbox', $data['nosslcheck']); ?>
 <?php input('cacert', _("CA Certificate:"), 'textarea', $data['cacert'],"certificate"); ?>
 <p><?php __("You must have created a SlaveDNS account in the administrator panel of AlternC."); ?>
 <br/ ><?php __("The url is usually like https://login:password@panel.yourserver.tld/domlist.php"); ?>
-<br/ ><?php __("If you don't have a proper CA-signed certificate, you can paste here your self-signed certificate."); ?>
+<br/ ><?php __("If you don't have a proper CA-signed certificate, you can paste here your self-signed certificate, or check the box above to block any certificate check (not recommended)."); ?>
   </fieldset>
   <p class="submit"><input type="submit" value="<?php
 if ($op == 'add') __("Add this server");

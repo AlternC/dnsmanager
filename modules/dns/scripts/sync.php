@@ -54,13 +54,17 @@ function rolling_curl($urls, $callback, $custom_options = null) {
     if ($GLOBALS["DEBUG"]) echo "URL: ".$urls[$i]["url"]."\n";
     curl_setopt_array($ch,$options);
     // Handle custom cafile for some https url
-    if (strtolower(substr($options[CURLOPT_URL],0,5))=="https") { // https :) 
-      if (isset($urls[$i]["cafile"]) && $urls[$i]["cafile"] && is_file($urls[$i]["cafile"])) {
-	curl_setopt($ch,CURLOPT_CAINFO,$urls[$i]["cafile"]);
-	if ($GLOBALS["DEBUG"]) echo "cainfo set to ".$urls[$i]["cafile"]."\n";
+    if (strtolower(substr($options[CURLOPT_URL],0,5))=="https") { // https :)
+      if (isset($urls[$i]["nosslcheck"]) && $urls[$i]["nosslcheck"]==1) {
+	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
       } else {
-	curl_setopt($ch,CURLOPT_CAINFO,DEFAULT_CAFILE);
-	if ($GLOBALS["DEBUG"]) echo "cainfo set to DEFAULT\n";
+	if (isset($urls[$i]["cafile"]) && $urls[$i]["cafile"] && is_file($urls[$i]["cafile"])) {
+	  curl_setopt($ch,CURLOPT_CAINFO,$urls[$i]["cafile"]);
+	  if ($GLOBALS["DEBUG"]) echo "cainfo set to ".$urls[$i]["cafile"]."\n";
+	} else {
+	  curl_setopt($ch,CURLOPT_CAINFO,DEFAULT_CAFILE);
+	  if ($GLOBALS["DEBUG"]) echo "cainfo set to DEFAULT\n";
+	}
       }
     }
     curl_multi_add_handle($master, $ch);
@@ -213,7 +217,7 @@ function parsezone($url,$content,$info) {
 
 
 
-$st=$db->q("SELECT id,user,url,cacert FROM servers WHERE enabled=1 ORDER BY id;");
+$st=$db->q("SELECT id,user,url,cacert,nosslcheck FROM servers WHERE enabled=1 ORDER BY id;");
 
 $scount=0;
 $srv=array();
@@ -221,6 +225,7 @@ $srv=array();
 while ($c=$st->fetch(PDO::FETCH_ASSOC)) {
   $srv[$scount]=array( "url" => $c["url"],
 		       "id" => $c["id"],
+		       "nosslcheck" => $c["nosslcheck"],
 		       "user" => $c["user"]
 		       );
   if ($c["cacert"]) {
