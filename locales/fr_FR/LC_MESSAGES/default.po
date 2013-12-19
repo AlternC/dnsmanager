@@ -2,21 +2,21 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Benjamin Sonntag <benjamin@sonntag.fr>, 2012.
+# Benjamin Sonntag <benjamin@sonntag.fr>, 2012, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: AlternC-dnsmanager 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-19 11:06+0100\n"
-"PO-Revision-Date: 2012-12-10 19:03+0100\n"
+"PO-Revision-Date: 2013-12-19 11:12+0100\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bits\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: common.php:25
 msgid "Cannot connect to the database:"
@@ -911,18 +911,18 @@ msgstr "Date / Heure"
 
 #: modules/dns/views/form.php:43
 msgid "Don't check the certificate"
-msgstr ""
+msgstr "Ne pas vérifier le certificat"
 
 #: modules/dns/views/form.php:47
-#, fuzzy
 msgid ""
 "If you don't have a proper CA-signed certificate, you can paste here your "
 "self-signed certificate, or check the box above to block any certificate "
 "check (not recommended)."
 msgstr ""
 "Si vous ne disposez pas d'un certificat signé par une autorité de "
-"certification, vous pouvez coller ici votre certificat auto-signé."
+"certification, vous pouvez coller ici votre certificat auto-signé, ou cocher "
+"la case ci-dessus pour ne pas vérifier les certificats (non recommandé)."
 
 #: modules/dns/controller.php:339
 msgid "Hourly scan"
-msgstr ""
+msgstr "Scan toutes les heures"
