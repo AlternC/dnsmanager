@@ -24,7 +24,11 @@ if (empty($title))
 		     Hooks::call('content_top', $html);
 		     echo implode($html, "\n");
 		     ?>
-<p class="login"><?php printf(_("Connected as %s"),"<strong>".$GLOBALS["me"]["login"]."</strong>"); ?></p>
+<p class="login"> <a href="?setlang=fr_FR">Français</a> - <a href="?setlang=en_US">English</a> &nbsp;  <?php
+		       if ($GLOBALS["me"]["login"]) {
+			 printf(_("Connected as %s"),"<strong>".$GLOBALS["me"]["login"]."</strong>"); 
+		       }
+?></p>
 		</div>
 		<h1>AlternC dnsmanager<?php if (!empty($title)): ?> - <?php print $title; ?><?php endif; ?></h1>
                 <div id="menu"><?php require VIEWS . '/menu.php'; ?></div>

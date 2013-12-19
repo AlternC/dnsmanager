@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC-dnsmanager 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 11:22+0100\n"
+"POT-Creation-Date: 2013-12-19 11:46+0100\n"
 "PO-Revision-Date: 2013-12-19 11:12+0100\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Erreur base de données PDO prepare :"
 msgstr "Erreur base de données PDO lors du prepare :"
 
-#: views/header.php:27
+#: views/header.php:27 views/header.php:29
 #, php-format
 msgid "Connected as %s"
 msgstr "Connecté à %s"
@@ -111,7 +111,7 @@ msgstr "Adresse IPv4 :"
 msgid "Enable DNS synchronization using AlternC's protocol?"
 msgstr "Activer la synchronisation DNS utilisant le protocole d'AlternC ?"
 
-#: modules/dns/views/form.php:38
+#: modules/dns/views/form.php:38 modules/dns/views/form.php:39
 msgid ""
 "If you enable the synchronization of DNS zones from your AlternC to this "
 "manager, you need to fill the fields below."
@@ -119,15 +119,16 @@ msgstr ""
 "Si vous activez la synchronisation de la liste des zones DNS depuis votre "
 "AlternC sur le gestionnaire, vous devez remplir les champs ci-dessous."
 
-#: modules/dns/views/form.php:41
+#: modules/dns/views/form.php:41 modules/dns/views/form.php:42
 msgid "AlternC synchronisation"
 msgstr "Synchronisation AlternC"
 
-#: modules/dns/views/form.php:42
+#: modules/dns/views/form.php:42 modules/dns/views/form.php:43
 msgid "URL:"
 msgstr "URL :"
 
 #: modules/dns/views/form.php:43 modules/dns/views/form.php:44
+#: modules/dns/views/form.php:45
 msgid "CA Certificate:"
 msgstr "Certificat de CA :"
 
@@ -156,16 +157,18 @@ msgstr ""
 "certification, vous pouvez coller ici votre certificat auto-signé."
 
 #: modules/dns/views/form.php:49 modules/dns/views/form.php:50
+#: modules/dns/views/form.php:51
 msgid "Add this server"
 msgstr "Ajouter ce serveur"
 
 #: modules/dns/views/form.php:50 modules/dns/views/show.php:7
-#: modules/dns/views/form.php:51
+#: modules/dns/views/form.php:51 modules/dns/views/form.php:52
 msgid "Edit this server"
 msgstr "Modifier ce serveur"
 
 #: modules/dns/views/form.php:51 modules/users/views/form.php:48
 #: modules/users/views/home.php:34 modules/dns/views/form.php:52
+#: modules/dns/views/form.php:53
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -930,11 +933,11 @@ msgstr "Date"
 msgid "Date/Hour"
 msgstr "Date / Heure"
 
-#: modules/dns/views/form.php:43
+#: modules/dns/views/form.php:43 modules/dns/views/form.php:44
 msgid "Don't check the certificate"
 msgstr "Ne pas vérifier le certificat"
 
-#: modules/dns/views/form.php:47
+#: modules/dns/views/form.php:47 modules/dns/views/form.php:48
 msgid ""
 "If you don't have a proper CA-signed certificate, you can paste here your "
 "self-signed certificate, or check the box above to block any certificate "
@@ -948,7 +951,7 @@ msgstr ""
 msgid "Hourly scan"
 msgstr "Scan toutes les heures"
 
-#: modules/dns/views/form.php:45
+#: modules/dns/views/form.php:45 modules/dns/views/form.php:46
 msgid ""
 "You must have created a SlaveDNS account in the <b>Admin Control Panel</b> "
 "of AlternC, in the <b>Manage slave DNS</b> menu."
@@ -957,7 +960,7 @@ msgstr ""
 "Administrateur</b> d'AlternC, dans le sous-menu <b>Gérer les DNS esclaves</"
 "b>."
 
-#: modules/dns/views/form.php:46
+#: modules/dns/views/form.php:46 modules/dns/views/form.php:47
 msgid ""
 "The url is usually like <code>https://login:password@panel.yourserver.tld/"
 "domlist.php</code>"
@@ -972,3 +975,9 @@ msgstr "n/a"
 #: modules/dns/controller.php:80
 msgid "SSL Check"
 msgstr "Vérif SSL"
+
+#: modules/dns/views/form.php:36
+msgid ""
+"The hostname usually don't contains any dot (.) and is the canonical name of "
+"the server. eg. <em>gandalf</em> or <em>brassens</em>."
+msgstr "Le nom d'hôte ne contient généralement pas de point (.). On l'appelle aussi non canonique du serveur. ex: <em>gandalf</em> ou <em>brassens</em>."

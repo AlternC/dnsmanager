@@ -33,6 +33,7 @@ require VIEWS . '/header.php';
     <?php input('ip', _("IPv4 Address:"), 'text', $data['ip']); ?>
 
     <?php input('enabled', _("Enable DNS synchronization using AlternC's protocol?"), 'checkbox', $data['enabled']); ?>
+  <p><?php __("The hostname usually don't contains any dot (.) and is the canonical name of the server. eg. <em>gandalf</em> or <em>brassens</em>."); ?></p>
 </fieldset>
 
   <p><?php __("If you enable the synchronization of DNS zones from your AlternC to this manager, you need to fill the fields below."); ?></p>

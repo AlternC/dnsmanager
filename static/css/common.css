@@ -330,3 +330,8 @@ table.col td {
 .largeinput {
     width: 500px !important;
 }
+code {
+    font-size: 1.2em;
+    
+}
+
