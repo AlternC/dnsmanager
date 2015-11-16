@@ -5,7 +5,7 @@ A program to manage slavedns for AlternC's instance.
 
 a web interface to manager slave dns of alternc's instances
 
-Go to https://www.alternc.com/ for more information, downloads, documentation...
+Go to http://www.alternc.com/ for more information, downloads, documentation...
 
 Copyright (C) 2012 Benjamin Sonntag <benjamin@sonntag.fr>
 <other contributor, put your name here>
