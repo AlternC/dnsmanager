@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 11:46+0100\n"
+"POT-Creation-Date: 2015-11-16 15:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr ""
 msgid "Erreur base de données PDO prepare :"
 msgstr ""
 
-#: views/header.php:27 views/header.php:29
+#: views/header.php:27 views/header.php:29 views/header.php:29
 #, php-format
 msgid "Connected as %s"
 msgstr ""
@@ -113,21 +113,24 @@ msgid "Enable DNS synchronization using AlternC's protocol?"
 msgstr ""
 
 #: modules/dns/views/form.php:38 modules/dns/views/form.php:39
+#: modules/dns/views/form.php:39
 msgid ""
 "If you enable the synchronization of DNS zones from your AlternC to this "
 "manager, you need to fill the fields below."
 msgstr ""
 
 #: modules/dns/views/form.php:41 modules/dns/views/form.php:42
+#: modules/dns/views/form.php:42
 msgid "AlternC synchronisation"
 msgstr ""
 
 #: modules/dns/views/form.php:42 modules/dns/views/form.php:43
+#: modules/dns/views/form.php:43
 msgid "URL:"
 msgstr ""
 
 #: modules/dns/views/form.php:43 modules/dns/views/form.php:44
-#: modules/dns/views/form.php:45
+#: modules/dns/views/form.php:45 modules/dns/views/form.php:45
 msgid "CA Certificate:"
 msgstr ""
 
@@ -150,20 +153,20 @@ msgid ""
 msgstr ""
 
 #: modules/dns/views/form.php:49 modules/dns/views/form.php:50
-#: modules/dns/views/form.php:51
+#: modules/dns/views/form.php:51 modules/dns/views/form.php:51
 msgid "Add this server"
 msgstr ""
 
 #: modules/dns/views/form.php:50 modules/dns/views/show.php:7
 #: modules/dns/views/form.php:51 modules/dns/views/form.php:52
-#: modules/dns/views/show.php:7
+#: modules/dns/views/form.php:52 modules/dns/views/show.php:7
 msgid "Edit this server"
 msgstr ""
 
 #: modules/dns/views/form.php:51 modules/users/views/form.php:48
 #: modules/users/views/home.php:34 modules/dns/views/form.php:52
-#: modules/dns/views/form.php:53 modules/users/views/form.php:48
-#: modules/users/views/home.php:34
+#: modules/dns/views/form.php:53 modules/dns/views/form.php:53
+#: modules/users/views/home.php:34 modules/users/views/form.php:48
 msgid "Cancel"
 msgstr ""
 
@@ -196,8 +199,8 @@ msgid "Server informations"
 msgstr ""
 
 #: modules/dns/views/show.php:37 modules/dns/controller.php:75
-#: modules/dns/controller.php:76 modules/dns/views/show.php:37
-#: modules/dns/controller.php:76
+#: modules/dns/controller.php:76 modules/dns/controller.php:76
+#: modules/dns/views/show.php:37
 msgid "Hostname"
 msgstr ""
 
@@ -210,20 +213,20 @@ msgid "AlternC synchronization enabled ?"
 msgstr ""
 
 #: modules/dns/views/show.php:44 modules/dns/controller.php:54
+#: modules/dns/controller.php:55 modules/dns/controller.php:54
 #: modules/dns/controller.php:55 modules/dns/views/show.php:44
-#: modules/dns/controller.php:54 modules/dns/controller.php:55
 msgid "Yes"
 msgstr ""
 
 #: modules/dns/views/show.php:44 modules/dns/controller.php:54
+#: modules/dns/controller.php:55 modules/dns/controller.php:54
 #: modules/dns/controller.php:55 modules/dns/views/show.php:44
-#: modules/dns/controller.php:54 modules/dns/controller.php:55
 msgid "No"
 msgstr ""
 
 #: modules/dns/views/show.php:46 modules/dns/controller.php:76
-#: modules/dns/controller.php:77 modules/dns/views/show.php:46
-#: modules/dns/controller.php:77
+#: modules/dns/controller.php:77 modules/dns/controller.php:77
+#: modules/dns/views/show.php:46
 msgid "URL"
 msgstr ""
 
@@ -247,16 +250,16 @@ msgstr ""
 #: modules/users/views/form.php:8 modules/users/views/show.php:6
 #: modules/users/controller.php:38 modules/users/controller.php:39
 #: modules/dns/controller.php:70 modules/dns/controller.php:70
-#: modules/users/views/form.php:8 modules/users/views/me.php:5
-#: modules/users/views/show.php:6 modules/users/controller.php:39
+#: modules/users/controller.php:39 modules/users/views/me.php:5
+#: modules/users/views/form.php:8 modules/users/views/show.php:6
 msgid "Edit"
 msgstr ""
 
 #: modules/dns/controller.php:70 modules/users/views/show.php:7
 #: modules/users/controller.php:39 modules/dns/views/delete.php:3
 #: modules/users/controller.php:40 modules/dns/controller.php:71
-#: modules/dns/views/delete.php:3 modules/dns/controller.php:71
-#: modules/users/views/show.php:7 modules/users/controller.php:40
+#: modules/dns/controller.php:71 modules/dns/views/delete.php:3
+#: modules/users/controller.php:40 modules/users/views/show.php:7
 msgid "Delete"
 msgstr ""
 
@@ -291,8 +294,8 @@ msgstr ""
 #: modules/dns/controller.php:85 modules/users/views/me.php:5
 #: modules/users/views/show.php:5 modules/users/controller.php:50
 #: modules/users/controller.php:51 modules/dns/controller.php:87
-#: modules/dns/controller.php:87 modules/users/views/me.php:5
-#: modules/users/views/show.php:5 modules/users/controller.php:51
+#: modules/dns/controller.php:87 modules/users/controller.php:51
+#: modules/users/views/me.php:5 modules/users/views/show.php:5
 msgid "Actions"
 msgstr ""
 
@@ -354,17 +357,17 @@ msgstr ""
 #: modules/dns/controller.php:139 modules/dns/controller.php:355
 #: modules/dns/views/show.php:81 modules/dns/controller.php:369
 #: modules/dns/controller.php:141 modules/dns/controller.php:371
-#: modules/dns/views/show.php:81 modules/dns/controller.php:141
-#: modules/dns/controller.php:371
+#: modules/dns/controller.php:141 modules/dns/controller.php:371
+#: modules/dns/views/show.php:81
 msgid "Event"
 msgstr ""
 
 #: modules/dns/controller.php:140 modules/dns/controller.php:356
 #: modules/dns/views/show.php:64 modules/dns/views/show.php:81
 #: modules/dns/controller.php:370 modules/dns/controller.php:142
+#: modules/dns/controller.php:372 modules/dns/controller.php:142
 #: modules/dns/controller.php:372 modules/dns/views/show.php:64
-#: modules/dns/views/show.php:81 modules/dns/controller.php:142
-#: modules/dns/controller.php:372
+#: modules/dns/views/show.php:81
 msgid "Zone"
 msgstr ""
 
@@ -457,7 +460,7 @@ msgid "Enter your new password (again):"
 msgstr ""
 
 #: modules/users/views/me.php:2 modules/users/views/form.php:8
-#: modules/users/views/form.php:8 modules/users/views/me.php:2
+#: modules/users/views/me.php:2 modules/users/views/form.php:8
 msgid "My account"
 msgstr ""
 
@@ -477,8 +480,8 @@ msgstr ""
 
 #: modules/users/views/me.php:21 modules/users/views/form.php:37
 #: modules/users/views/show.php:26 modules/users/views/home.php:31
-#: modules/users/views/form.php:37 modules/users/views/home.php:31
-#: modules/users/views/me.php:21 modules/users/views/show.php:26
+#: modules/users/views/me.php:21 modules/users/views/home.php:31
+#: modules/users/views/form.php:37 modules/users/views/show.php:26
 msgid "Email address"
 msgstr ""
 
@@ -487,7 +490,7 @@ msgid "Edit my account"
 msgstr ""
 
 #: modules/users/views/form.php:11 modules/users/views/list.php:4
-#: modules/users/views/form.php:11 modules/users/views/list.php:4
+#: modules/users/views/list.php:4 modules/users/views/form.php:11
 msgid "Create a user"
 msgstr ""
 
@@ -508,7 +511,7 @@ msgid "Password:"
 msgstr ""
 
 #: modules/users/views/form.php:29 modules/users/views/home.php:29
-#: modules/users/views/form.php:29 modules/users/views/home.php:29
+#: modules/users/views/home.php:29 modules/users/views/form.php:29
 msgid "Password (confirmation):"
 msgstr ""
 
@@ -554,7 +557,7 @@ msgid "AlternC DNS Manager"
 msgstr ""
 
 #: modules/users/views/createok.php:6 modules/users/views/validate.php:6
-#: modules/users/views/createok.php:6 modules/users/views/validate.php:6
+#: modules/users/views/validate.php:6 modules/users/views/createok.php:6
 msgid "Account Creation"
 msgstr ""
 
@@ -582,7 +585,7 @@ msgstr ""
 
 #: modules/users/views/forgot.php:2 modules/users/views/forgotok.php:2
 #: modules/users/views/home.php:15 modules/users/views/forgot.php:2
-#: modules/users/views/forgotok.php:2 modules/users/views/home.php:15
+#: modules/users/views/home.php:15 modules/users/views/forgotok.php:2
 msgid "I forgot my password"
 msgstr ""
 
@@ -938,10 +941,12 @@ msgid "Date/Hour"
 msgstr ""
 
 #: modules/dns/views/form.php:43 modules/dns/views/form.php:44
+#: modules/dns/views/form.php:44
 msgid "Don't check the certificate"
 msgstr ""
 
 #: modules/dns/views/form.php:47 modules/dns/views/form.php:48
+#: modules/dns/views/form.php:48
 msgid ""
 "If you don't have a proper CA-signed certificate, you can paste here your "
 "self-signed certificate, or check the box above to block any certificate "
@@ -954,12 +959,14 @@ msgid "Hourly scan"
 msgstr ""
 
 #: modules/dns/views/form.php:45 modules/dns/views/form.php:46
+#: modules/dns/views/form.php:46
 msgid ""
 "You must have created a SlaveDNS account in the <b>Admin Control Panel</b> "
 "of AlternC, in the <b>Manage slave DNS</b> menu."
 msgstr ""
 
 #: modules/dns/views/form.php:46 modules/dns/views/form.php:47
+#: modules/dns/views/form.php:47
 msgid ""
 "The url is usually like <code>https://login:password@panel.yourserver.tld/"
 "domlist.php</code>"
@@ -973,7 +980,7 @@ msgstr ""
 msgid "SSL Check"
 msgstr ""
 
-#: modules/dns/views/form.php:36
+#: modules/dns/views/form.php:36 modules/dns/views/form.php:36
 msgid ""
 "The hostname usually don't contains any dot (.) and is the canonical name of "
 "the server. eg. <em>gandalf</em> or <em>brassens</em>."
