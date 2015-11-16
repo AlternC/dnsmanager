@@ -1,11 +1,14 @@
-This is alternc-dnsmanager 1.0
+alternc-dnsmanager 1.0
+======================
 
 A program to manage slavedns for AlternC's instance.
+
+a web interface to manager slave dns of alternc's instances
 
 Go to https://www.alternc.com/ for more information, downloads, documentation...
 
 Copyright (C) 2012 Benjamin Sonntag <benjamin@sonntag.fr>
-<contributor, put your name here>
+<other contributor, put your name here>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
